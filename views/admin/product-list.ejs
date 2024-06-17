@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Management</title>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  .product-image {
+    max-width: 100px;
+    max-height: 100px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container my-5">
+  <h2>Product Management</h2>
+
+  <!-- Search Form -->
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Search products..." aria-label="Search products" aria-describedby="searchBtn" id="searchInput">
+    <div class="input-group-append">
+      <button class="btn btn-primary" type="button" id="searchBtn">Search</button>
+    </div>
+  </div>
+
+  <!-- Add New Product Form -->
+  <form id="addProductForm" class="mb-4" method="POST" action="/admin/single-product-update">
+    <div class="form-row">
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Your product name" name="name">
+      </div>
+      <div class="col">
+        <button type="submit" class="btn btn-primary">Add Product</button>
+      </div>
+    </div>
+  </form>
+
+
+<!-- Product List Table -->
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Image</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Product Code</th>
+      <th scope="col">Price</th>
+      <th scope="col">Category</th>
+      <th scope="col">In Stock</th>
+    </tr>
+  </thead>
+  <tbody id="productListBody" class="loading-animation-container">
+    <div id="loadingAnimation" class="loading-animation"></div>
+
+    <!-- Display product list dynamically -->
+    <% products.forEach(product => { %>
+
+      <tr>
+        <!-- Display the first image -->
+        <% if (product.images && product.images.length > 0) { %>
+          <td><img src="/images/<%= product.images[0].filename %>" alt="Product Image" class="product-image"></td>
+        <% } else { %>
+          <td>No image available</td>
+        <% } %>        
+        <!-- Display other product details -->
+        <td><a href="/admin/single-product-update/<%= product.slug %>"><%= product.name %></a></td>
+        <td><%= product.productCode %></td>
+        <td><%= product.regularPrice %> tk</td>
+        <td><%= product.category %></td>
+        <td><%= product.isInStock ? 'Yes' : 'No' %></td>
+      </tr>
+    <% }); %>
+    <!-- Add more rows dynamically if needed -->
+  </tbody>
+</table>
+
+<style>
+ .loading-animation-container {
+  position: relative;
+}
+
+.loading-animation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 8px solid rgba(0, 0, 0, 0.1);
+  border-left: 8px solid #3498db;
+  border-radius: 50%;
+display: none;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#searchBtn').click(function() {
+      // Show loading animation
+      $('#loadingAnimation').show();
+
+      var searchQuery = $('#searchInput').val();
+      $.ajax({
+        url: '/admin/search-products',
+        type: 'GET',
+        data: { query: searchQuery },
+        success: function(response) {
+          // Clear previous search results
+          $('#productListBody').empty();
+          // Render new search results
+          response.forEach(function(product) {
+            // Construct the table row
+            var row = $('<tr>');
+            // Check if the product has images
+            if (product.images && product.images.length > 0) {
+              // Add the first image
+              var image = $('<img>').attr('src', '/images/' + product.images[0].filename).addClass('product-image').attr('alt', 'Product Image');
+              row.append($('<td>').append(image));
+            } else {
+              // If no images, display "No image available"
+              row.append($('<td>').text('No image available'));
+            }
+            // Add other product details
+            var productNameLink = $('<a>').attr('href', '/admin/single-product-update/' + product.slug).text(product.name);
+            row.append($('<td>').append(productNameLink));
+            row.append($('<td>').text(product.slug));
+            row.append($('<td>').text(product.regularPrice + ' tk'));
+            row.append($('<td>').text(product.category));
+            row.append($('<td>').text(product.isInStock ? 'Yes' : 'No'));
+            // Append the constructed row to the table body
+            $('#productListBody').append(row);
+          });
+        },
+        error: function(xhr, status, error) {
+          console.error('Error searching products:', error);
+        },
+        complete: function() {
+          // Hide loading animation after AJAX request is complete
+          $('#loadingAnimation').hide();
+        }
+      });
+    });
+  });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Product - Admin Panel</title>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+<body>
+  <div class="container my-5">
+    <h2 class="mb-4">Add Product</h2>
+    <form id="addProductForm" action="/admin/single-product-update" method="POST">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" name="name" required value="<%= product.name %>">
+      </div>
+      <div class="form-group">
+        <label for="name">URL Link Slug:</label>
+        <input type="text" class="form-control" id="slug" name="slug" required value="<%= product.slug %>">
+      </div>
+      <div class="form-group">
+        <label for="name">Product Code:</label>
+        <input type="text" class="form-control" id="productCode" name="productCode" value="<%= product.productCode %>">
+      </div>
+      <input type="text" name="id" value="<%= product._id %>" hidden>
+  
+      <div class="form-group">
+          <label for="category">Category:</label>
+          <select class="form-control category" id="category" name="category">
+            <option value="daily-accessories" <%= product.category === 'daily-accessories' ? 'selected' : '' %>>Daily Accessories</option>
+            <option value="kitchen-dining" <%= product.category === 'kitchen-dining' ? 'selected' : '' %>>Kitchen & Dining</option>
+            <option value="health-beauty" <%= product.category === 'health-beauty' ? 'selected' : '' %>>Health & Beauty</option>
+            <option value="gadgets-accessories" <%= product.category === 'gadgets-accessories' ? 'selected' : '' %>>Gadgets & Accessories</option>
+            <option value="toys-games" <%= product.category === 'toys-games' ? 'selected' : '' %>>Toys & Games</option>
+            <option value="books-stationery" <%= product.category === 'books-stationery' ? 'selected' : '' %>>Books & Stationery</option>
+            <option value="organic-food" <%= product.category === 'organic-food' ? 'selected' : '' %>>Organic Food</option>
+          </select>
+      </div>
+    
+      <div class="form-group">
+          <label for="short-description">Short Description:</label>
+          <textarea class="form-control" id="short-description" name="shortDescription" rows="4"><%= product.shortDescription %></textarea>
+      </div>
+    
+  
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea class="form-control" id="description" name="description" rows="4"><%= product.description %></textarea>
+      </div>
+  
+    
+      <div class="form-row mt-3">
+          <div class="col">
+            <label for="regularPrice">Regular Price:</label>
+            <input type="number" class="form-control" id="regularPrice" placeholder="Regular Price.." name="regularPrice" min="0" step="0.01" required value="<%= product.regularPrice %>">
+          </div>
+          <div class="col">
+            <label for="discountPrice">Discount Price:</label>
+            <input type="number" class="form-control" id="discountPrice" placeholder="Discount Price" name="discountPrice" min="0" step="0.01" value="<%= product.discountPrice %>">
+          </div>
+          <div class="col">
+            <label for="stockQuantity">Stock Quantity:</label>
+            <input type="number" class="form-control" id="stockQuantity" placeholder="Stock Quantity" name="stockQuantity" min="0" value="<%= product.stockQuantity %>">
+          </div>
+      </div>
+
+      
+      <div class="form-row mt-3">
+        <div class="col">
+          <label for="insideDhaka">Delivery Inside Dhaka:</label>
+          <input type="number" class="form-control" id="insideDhaka" placeholder="Inside Dhaka" name="insideDhaka" min="0" step="0.01"  value="<%= product.insideDhaka %>">
+        </div>
+        <div class="col">
+          <label for="outsideDhaka">Delivery Outside Dhaka:</label>
+          <input type="number" class="form-control" id="outsideDhaka" placeholder="Outside Dhaka" name="outsideDhaka" min="0" step="0.01" value="<%= product.outsideDhaka %>">
+        </div>
+    </div>
+    
+      <div class="form-row mt-3">
+          <div class="col">
+            <label for="brand">Brand:</label>
+            <input type="text" class="form-control" id="brand" placeholder="Brand" name="brand" value="<%= product.brand %>">
+          </div>
+          <div class="col">
+            <label for="tags">Tags:</label>
+            <input type="text" class="form-control" id="tags" placeholder="Tags" name="tags" value="<%= product.tags[0] %>">
+          </div>
+      </div>
+    
+      <div class="form-row mt-3">
+          <div class="col">
+            <label for="video">Video:</label>
+            <input type="text" class="form-control" id="video" placeholder="Video" name="video" value="<%= product.video %>">
+          </div>
+          <div class="col">
+            <label for="handlingTime">Handling Time:</label>
+            <input type="text" class="form-control" id="handlingTime" placeholder="Handling Time" name="handlingTime" value="<%= product.handlingTime %>">
+          </div>
+      </div>
+      <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="isBestSeller" name="isBestSeller" <%= product.isBestSeller ? 'checked' : '' %>>
+          <label class="form-check-label" for="isBestSeller">Is Best Seller</label>
+      </div>
+    
+      <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="isNewArrival" name="isNewArrival" <%= product.isNewArrival ? 'checked' : '' %>>
+          <label class="form-check-label" for="isNewArrival">Is New Arrival</label>
+      </div>
+    
+      <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="isFeatured" name="isFeatured" <%= product.isFeatured ? 'checked' : '' %>>
+          <label class="form-check-label" for="isFeatured">Is Featured</label>
+      </div>
+      <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="isVisible" name="isVisible" <%= product.isVisible ? 'checked' : '' %>>
+          <label class="form-check-label" for="isVisible">Is Visible</label>
+      </div>
+    
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="isFreeDelivery" name="isFreeDelivery" <%= product.isFreeDelivery ? 'checked' : '' %>>
+        <label class="form-check-label" for="isFreeDelivery">Is Free Delivery</label>
+    </div>
+  
+
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="isInStock" name="isInStock" <%= product.isInStock ? 'checked' : '' %>>
+        <label class="form-check-label" for="isInStock">Is In Stock</label>
+      </div>
+  
+  
+      <button type="submit" class="btn btn-primary">Add Product</button>
+    </form>
+  </div>
+  
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+<style>
+  #imagePreview {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  .preview-image {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  .preview-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .remove-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    color: red;
+    font-size: 16px;
+  }
+</style>
+<!-- <div class="container my-5">
+    <h2 class="mb-4">Upload Product Images</h2>
+    <form id="uploadForm" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="fileInput">Select Images:</label>
+        <input type="file" class="form-control-file" id="fileInput" name="images" multiple>
+      </div>
+      <button type="submit" class="btn btn-primary">Upload Images</button>
+    </form>
+  </div> -->
+  
+  <div class="container my-5">
+    <h2 class="mb-4">Upload Product Images</h2>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="colorInput">Color Name:</label>
+            <input type="text" class="form-control" id="coorInput" name="color">
+        </div>
+        <div class="form-group">
+          <label for="colorCode">Choose a color:</label>
+          <input type="color" id="colorCode" name="colorCode">
+        </div>
+        
+        <div class="form-group">
+            <label for="fileInput">Select Image:</label>
+            <input type="file" class="form-control-file" id="fileInput" name="image">
+        </div>
+        <button type="submit" class="btn btn-primary">Upload Image</button>
+    </form>
+</div>
+
+  <div class="container mt-5">
+    <div id="imagePreview">
+      <% product.images.forEach(image => { %>
+        <div class="preview-image" style="background:<%= image.colorCode %>;">
+            <input type="radio" name="previewImage" value="<%= image.filename %>" <%= product.previewImage === image.filename ? 'checked' : '' %>>
+            <img src="/images/<%= image.filename %>">
+            <i class="remove-icon fas fa-times-circle"></i>
+        </div>
+    <% }) %>
+    
+  </div>
+
+  
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+  $('#uploadForm').submit(function(e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+    var colorCodeValue = $('#colorCode').val();
+
+    // Check if the selected color is black
+    if (colorCodeValue.match(/^#000000|black|rgb\s*\(\s*0\s*,\s*0\s*,\s*0\s*\)$/i)) {
+        formData.set('colorCode', ''); // Set it to an empty string
+    }
+
+    $.ajax({
+      url: '/upload?id=<%= product._id %>',
+      type: 'POST',
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(response) {
+        console.log('Images uploaded:', response);
+        console.log('Images uploaded product.image:', response);
+        
+        displayUploadedImages(response.images);
+      },
+      error: function(xhr, status, error) {
+        console.error('Error uploading images:', error);
+      }
+    });
+  });
+
+  // Function to display uploaded images
+  function displayUploadedImages(images) {
+    var imagePreview = $('#imagePreview');
+    imagePreview.empty();
+    images.forEach(function(imageUrl) {
+      var previewImage = $('<div class="preview-image" style="background:'+ imageUrl.colorCode +';" ><input type="radio" name="previewImage"  value="'+ imageUrl.filename +'"><img src="/images/'+ imageUrl.filename +'"><i class="remove-icon fas fa-times-circle"></i></div>');
+      imagePreview.append(previewImage);
+    });
+  }
+
+var imagePreview = $('#imagePreview');
+imagePreview.find('.remove-icon').click(function() {
+    var imageUrl = $(this).closest('.preview-image').find('img').attr('src').replace('/images/', '');
+    removeImage(imageUrl);
+    $(this).parent().remove();
+});
+
+// Function to remove an image
+function removeImage(imageUrl) {
+    $.ajax({
+        url: '/remove?id=<%= product._id %>',
+        type: 'POST',
+        data: { imageUrl: imageUrl },
+        success: function(response) {
+            console.log('Image removed:', imageUrl);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error removing image:', error);
+        }
+    });
+}
+
+
+
+
+var imagePreview = $('#imagePreview');
+imagePreview.find('.remove-icon').click(function() {
+    var imageUrl = $(this).closest('.preview-image').find('img').attr('src').replace('/images/', '');
+    removeImage(imageUrl);
+    $(this).parent().remove();
+});
+
+// Function to remove an image
+function removeImage(imageUrl) {
+    $.ajax({
+        url: '/remove?id=<%= product._id %>',
+        type: 'POST',
+        data: { imageUrl: imageUrl },
+        success: function(response) {
+            console.log('Image removed:', imageUrl);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error removing image:', error);
+        }
+    });
+}
+
+
+$('input[name="previewImage"]').on('change', function() {
+    var id = '<%= product._id %>'; // Assuming product ID is a server-side variable
+    var imageUrl = $(this).val();
+    addImage(id, imageUrl);
+});
+
+// Function to add an image
+function addImage(id, imageUrl) {
+    $.ajax({
+        url: '/update-preview-image',
+        type: 'POST',
+        data: { previewImage: imageUrl, id: id },
+        success: function(response) {
+            console.log('Image added:', response);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error adding image:', error);
+        }
+    });
+}
+
+
+});
+</script>
+
+
+
+
+

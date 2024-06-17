@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Calculation</title>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* CSS for demonstration purpose only */
+        .cart-plus-minus-box {
+            width: 50px;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #4a90e2;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="loading-overlay">
+    <div class="loading-spinner"></div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="li-product-remove">remove</th>
+            <th class="li-product-thumbnail">images</th>
+            <th class="cart-product-name">Product</th>
+            <th class="li-product-price">Unit Price</th>
+            <th class="li-product-quantity">Quantity</th>
+            <th class="li-product-subtotal">Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% cart.forEach(item => { %>
+            <tr class="cart-single-item">
+                <td class="li-product-remove"><a href="#" data-product-id="<%= item.productId %>"><i class="fa fa-times"></i>X</a></td>
+                <td class="li-product-thumbnail"><a href="#"><img src="<%= item.productImage %>" alt="Li's Product Image"></a></td>
+                <td class="li-product-name"><a href="#"><%= item.productName %></a></td>
+                <td class="li-product-price"><span class="single-amount"></span></td>
+                <td class="quantity">
+                    <label>Quantity</label>
+                    <div class="cart-plus-minus">
+                        <input class="cart-plus-minus-box" value="<%= item.quantity %>" type="number" min="1" data-product-id="<%= item.productId %>">
+                    </div>
+                </td>
+                <td class="product-subtotal"><span class="total-single-amount"><%= item.price * item.quantity %></span></td>
+            </tr>
+    </tbody>
+</table>
+
+<div id="total-amount">Total: $0.00</div>
+
+<script>
+    $(document).ready(function() {
+        // Function to update calculations
+        function updateCalculations() {
+            var total = 0;
+            $('.cart-single-item').each(function() {
+                var price = parseFloat($(this).find('.li-product-price .single-amount').text());
+                var quantity = parseInt($(this).find('.cart-plus-minus-box').val());
+                var subtotal = price * quantity;
+                $(this).find('.product-subtotal .total-single-amount').text(subtotal.toFixed(2));
+                total += subtotal;
+            });
+            $('#total-amount').text('Total: $' + total.toFixed(2));
+        }
+
+        // Event listener for quantity changes
+        $('.cart-plus-minus-box').on('blur', function() {
+            updateCalculations();
+            var productId = $(this).data('product-id');
+            var quantity = $(this).val();
+            updateCart(productId, quantity);
+        });
+
+        // Event listener for removing item
+        $('.li-product-remove a').on('click', function(e) {
+            e.preventDefault();
+            var productId = $(this).data('product-id');
+            removeCartItem(productId);
+        });
+
+        // Function to update cart item quantity via AJAX
+        function updateCart(productId, quantity) {
+            showLoading();
+            $.ajax({
+                url: '/add-to-cart',
+                method: 'POST',
+                data: { productId: productId, quantity: quantity },
+                success: function(response) {
+                    hideLoading();
+                    console.log('Cart item updated successfully:', response);
+                },
+                error: function(xhr, status, error) {
+                    hideLoading();
+                    console.error('Error updating cart item:', error);
+                }
+            });
+        }
+
+        // Function to remove cart item via AJAX
+        function removeCartItem(productId) {
+            showLoading();
+            console.log(productId)
+            $.ajax({
+                
+
+                
+            });
+        }
+
+        // Function to show loading overlay
+        function showLoading() {
+            $('.loading-overlay').show();
+        }
+
+        // Function to hide loading overlay
+        function hideLoading() {
+            $('.loading-overlay').hide();
+        }
+
+        // Initial update of calculations
+        updateCalculations();
+    });
+</script>
+
+</body>
+</html>
