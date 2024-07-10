@@ -2,133 +2,6 @@
 	<header>
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
-			<!-- Topbar
-			<div class="top-bar">
-				<div class="content-topbar flex-sb-m h-full container">
-					<div class="left-top-bar">
-						Free shipping for standard order over $100
-					</div>
-
-					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							Help & FAQs
-						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							My Account
-						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							EN
-						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							USD
-						</a>
-					</div>
-				</div>
-			</div> -->
-
-			<style>
-				
-				.hm-searchbox {
-display: flex;
-position: relative;
-background: #fff;
-border-radius: 5px;
-border: 1px solid #e1e1e1;
-min-width: 550px;
-height: 40px;
-float: left;
-}
-@media (max-width: 767px) {
-    .hm-searchbox {
-        min-width: 0px;
-    }
-
-
-	.hm-searchbox input {
-	font-size: 13px;
-	color: #a5a5a5;
-	height: 40px;
-	background: transparent;
-	border: none;
-	width: 0px;
-	padding: 0 0px 0 0px;
-}
-}
-.hm-searchbox .nice-select.select-search-category {
-width: 90px;
-line-height: 43px;
-height:38px;
-margin: 0;
-border: 0;
-padding: 0 28px 0 25px;
-color: #242424;
-font-size: 13px;
-border-radius: 15px 0 0 15px;
-font-family: 'Rubik',sans-serif;
-font-weight: 400;
-position: relative;
-}
-.select-search-category ul.list {
-height: 440px;
-overflow-y: auto;
-overscroll-behavior-x: none;
-}
-.hm-searchbox .current::after {
-content: "";
-position: absolute;
-display: block;
-height: 22px;
-width: 1px;
-background: #e1e1e1;
-top: 10px;
-right: -10px;
-font-size: 13px;
-}
-.hm-searchbox .nice-select.select-search-category::before {
-	right: 30px;
-	top: 25px;
-	color: #7e7e7e;
-}
-.hm-searchbox input {
-	font-size: 13px;
-	color: #a5a5a5;
-	height: 40px;
-	background: transparent;
-	border: none;
-	width: 100%;
-	padding: 0 60px 0 33px;
-}
-button.li-btn {
-border: none;
-background: #744bb5;
-color: #ffffff;
-font-size: 18px;
-width: 40px;
-border-radius: 0 2px 2px 0;
-height: 40px;
-line-height: 45px;
-position: absolute;
-right: -1px;
-top: -1px;
-transition: all 0.3s ease-in-out;
-cursor: pointer;
-}
-button.li-btn:hover {
-background: #333333;
-color: #ffffff;
-}
-
-.nice-select .option:hover, .nice-select .option.focus, .nice-select .option.selected.focus {
-background-color: #fed700;
-}
-.nice-select .option:hover {
-color: #ffffff;
-}
-
-			</style>
 			<div class="wrap-menu-desktop">
 				<div class="limiter-menu-desktop container">
 					
@@ -141,157 +14,823 @@ color: #ffffff;
 						<div class="icon-header-item">
 							
 							<div class="col-lg-9 pl-0 ml-sm-15 ml-xs-15">
-                                <!-- Begin Header Middle Searchbox Area -->
-                                <form action="#" class="hm-searchbox">
-                                    <select class="nice-select select-search-category">
-                                        <option value="0">All</option>                         
-                                        <option value="10">Laptops</option>                     
-                                        <option value="13">Cameras</option>                          
-                                        <option value="14">headphone</option>                                
-                                        <option value="15">Smartwatch</option>                           
-                                        <option value="16">Accessories</option>
-                                    </select>
-                                    <input type="text" placeholder="Enter your search key ...">
-                                    <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
-                                </form>
-                                <!-- Header Middle Searchbox Area End Here -->
+								<form action="/search" method="GET" class="hm-searchbox searchForm">
+									<input type="text" placeholder="Search product..." name="search-product">
+									<button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
+								</form>
+								<!-- Header Middle Searchbox Area End Here -->
 
                             </div>
+							<div class="results"> 
+		
+							</div>
+
 						</div>
 					<!-- Icon header -->
 						<div class="flex-r-m">
-
+							<div class="p-l-22 p-r-11" style="display: flex; line-height: 1; align-items: center; gap: 10px; justify-content: center;">
+								<div class="icon">
+									<img style="filter: brightness(0) saturate(0) grayscale(100%); width: 25px;" src="https://www.svgrepo.com/show/13641/phone-call.svg" alt="">
+	
+								</div>
+								<div class="text-cont" style="font-size: 15px; font-family: 'Assistant'; font-weight: 400;">
+									<p style="color:green"><b> &nbsp;24/7 SUPPORT</b></p>
+								<p>+8801772512057</p>
+								</div>
+							</div>
 							<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
 								<img style="filter: brightness(0) saturate(0) grayscale(100%); width: 25px;" src="https://dazzle.com.bd/images/navbar_icons/cart.webp" alt="">
 							</div>
-
-							<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-<img src="https://cdn-icons-png.flaticon.com/256/707/707680.png" style="filter: brightness(0) saturate(0) grayscale(100%); width: 25px;" alt="">
-							</a>
 						</div>
 					</div>
 						
 				</div>
 				<!-- Menu desktop -->
-				<div class="menu-desktop ">
-				<div class="container">
-					<ul class="main-menu">
-						<li class="active-menu">
-							<a href="index.html">Home</a>
-							<ul class="sub-menu">
-								<li><a href="index.html">Homepage 1</a></li>
-								<li><a href="home-02.html">Homepage 2</a></li>
-								<li><a href="home-03.html">Homepage 3</a></li>
-							</ul>
-						</li>
+				<div class="menu-desktop">
+					<div class="container">
+						<div class="main-menu-scroll">
+							<button class="left-button"><i class="fa fa-angle-left"></i></button>
+							<ul class="main-menu menu">
+								<li class="active-menu">
+								<a href="index.html">Home</a>
+								<ul class="sub-menu">
+									<li><a href="index.html">Homepage 1</a></li>
+									<li><a href="home-02.html">Homepage 2</a></li>
+									<li><a href="home-03.html">Homepage 3</a></li>
+								</ul>
+							</li>
+							<li><a href="product.html">Shop</a></li>
+							<li><a href="blog.html">Blog</a></li>
+							<li><a href="about.html">About</a></li>
+							<li><a href="contact.html">Contact</a></li>
+							<li><a href="product.html">Shop</a></li>
+							<li><a href="blog.html">Blog</a></li>
+							<li><a href="about.html">About</a></li>
+							<li><a href="contact.html">Contact</a></li>
+							<li><a href="product.html">Shop</a></li>
+							<li><a href="blog.html">Blog</a></li>
+							<li><a href="about.html">About</a></li>
+							<li><a href="contact.html">Contact</a></li>
+							<li><a href="product.html">Shop</a></li>
+							<li><a href="blog.html">Blog</a></li>
+							<li><a href="about.html">About</a></li>
+							<li><a href="contact.html">Contact</a></li>
+							<li><a href="product.html">Shop</a></li>
+							<li><a href="blog.html">Blog</a></li>
+							<li><a href="about.html">About</a></li>
+							<li><a href="contact.html">Contact</a></li>
+							<li><a href="product.html">Shop</a></li>
+							<li><a href="blog.html">Blog</a></li>
+							<li><a href="about.html">About</a></li>
+							<li><a href="contact.html">Contact</a></li>
 
-						<li>
-							<a href="product.html">Shop</a>
-						</li>
-
-						<li>
-							<a href="blog.html">Blog</a>
-						</li>
-
-						<li>
-							<a href="about.html">About</a>
-						</li>
-
-						<li>
-							<a href="contact.html">Contact</a>
-						</li>
-					</ul>
-				
+							<!-- Add more li elements as needed -->
+						</ul>
+						<button class="right-button"><i class="fa fa-angle-right "></i></button>
+					</div>
+					
+					
 				</div>
 				</div>	
+				
 			</div>	
 		</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const menus = document.querySelectorAll('.menu-desktop');
 
+    menus.forEach(menuDesktop => {
+        const menu = menuDesktop.querySelector('.menu');
+        const leftButton = menuDesktop.querySelector('.left-button');
+        const rightButton = menuDesktop.querySelector('.right-button');
+
+        const updateButtons = () => {
+            if (menu.scrollLeft === 0) {
+                leftButton.style.display = 'none';
+            } else {
+                leftButton.style.display = 'block';
+            }
+
+            if (menu.scrollWidth <= menu.clientWidth + menu.scrollLeft) {
+                rightButton.style.display = 'none';
+            } else {
+                rightButton.style.display = 'block';
+            }
+        };
+
+        leftButton.addEventListener('click', () => {
+            menu.scrollBy({ left: -200, behavior: 'smooth' });
+        });
+
+        rightButton.addEventListener('click', () => {
+            menu.scrollBy({ left: 200, behavior: 'smooth' });
+        });
+
+        menu.addEventListener('scroll', updateButtons);
+
+        updateButtons(); // Initial check
+    });
+});
+</script>
 		<!-- Header Mobile -->
-		<div class="wrap-header-mobile">
-			<div class="">
-				<div class="">
+		<div class="wrap-header-mobile mobile-nav">
+			<a href="/" class="logo">
+				<img src="/images/icons/logo-01.png" alt="IMG-LOGO">
+			</a>
 					<!-- Begin Header Middle Searchbox Area -->
-					<form action="#" class="hm-searchbox">
-						<input type="text" placeholder="Enter your search key ...">
+					<form action="/search" method="GET" class="hm-searchbox searchForm">
+						<input type="text" placeholder="Search product..." name="search-product">
 						<button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
 					</form>
-					<!-- Header Middle Searchbox Area End Here -->
-
-				</div>							
-			</div>
-
-			<!-- Button show menu -->
-			<div class="btn-show-menu-mobile hamburger hamburger--squeeze" style="padding: 15px; border-radius: 5px; border: 1px solid gray;">
-				<span class="hamburger-box">
-					<span class="hamburger-inner"></span>
-				</span>
-			</div>
+					
+					<div class="results"> 
+		
+					</div>
 		</div>
+		
 
-
+	</header>
+	
+	
 		<!-- Menu Mobile -->
-		<div class="menu-mobile">
-			<ul class="topbar-mobile">
-				<li>
-					<div class="left-top-bar">
-						Free shipping for standard order over $100
-					</div>
-				</li>
-
-				<li>
-					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							Help & FAQs
-						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							My Account
-						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							EN
-						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							USD
-						</a>
-					</div>
-				</li>
-			</ul>
-
+		<div class="menu-mobile-x">
 			<ul class="main-menu-m">
 				<li>
-					<a href="index.html">Home</a>
-					<ul class="sub-menu-m">
-						<li><a href="index.html">Homepage 1</a></li>
-						<li><a href="home-02.html">Homepage 2</a></li>
-						<li><a href="home-03.html">Homepage 3</a></li>
-					</ul>
-					<span class="arrow-main-menu-m">
-						<i class="fa fa-angle-right" aria-hidden="true"></i>
-					</span>
+					<a href="index.html">
+						<i class="fa fa-home"></i> Home
+					</a>
 				</li>
-
 				<li>
-					<a href="product.html">Shop</a>
+					<a href="product.html">
+						<i class="fa fa-shopping-cart"></i> Shop
+					</a>
 				</li>
-
 				<li>
-					<a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
+					<a href="shoping-cart.html" class="label1 rs1" data-label1="hot">
+						<i class="fa fa-star"></i> Features
+					</a>
 				</li>
-
 				<li>
-					<a href="blog.html">Blog</a>
+					<a href="about.html">
+						<i class="fa fa-users"></i> About
+					</a>
 				</li>
-
 				<li>
-					<a href="about.html">About</a>
-				</li>
-
-				<li>
-					<a href="contact.html">Contact</a>
+					<a href="contact.html">
+						<i class="fa fa-envelope"></i> Contact
+					</a>
 				</li>
 			</ul>
 		</div>
-	</header>
+		
+
+<!-- Cart -->
+<div class="wrap-header-cart js-panel-cart">
+	<div class="s-full js-hide-cart"></div>
+
+	<div class="header-cart flex-col-l p-l-25 p-r-25">
+		<div class="header-cart-title flex-w flex-sb-m p-b-8">
+			<span class="mtext-103 cl2">
+				Your Cart
+			</span>
+
+			<div class="fs-20 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+				<i class="zmdi zmdi-close"></i> Close
+			</div>
+		</div>
+		
+		<div class="header-cart-content flex-w js-pscroll">
+			<ul class="header-cart-wrapitem w-full">
+			<% if (cart && cart.length > 0) { %>
+			<% cart.forEach(item => { %>
+
+				<li class="header-cart-item flex-w flex-t m-b-12" data-id="<%= item.id %>">
+					<span class="cart-trash"><i class="fa fa-trash"></i></span>
+
+					<div class="header-cart-item-img">
+						<img class="cart-image" src="/images/<%= item.productImage %>" alt="IMG">
+					</div>
+
+					<div class="header-cart-item-txt">
+						<a href="#" class="header-cart-item-name  hov-cl1 trans-04">
+							<%= item.productName %> 
+						</a>
+						<% 
+						try {
+							let metaData = JSON.parse(item.metaData);
+							Object.keys(metaData).forEach(key => { %>
+								<span class="metaData"><%= key.charAt(0).toUpperCase() + key.slice(1).toLowerCase() %>: <%= metaData[key] %></span>
+							<% });
+						} catch (error) {
+							// Handle JSON parsing error if necessary
+							console.error('Error parsing metaData JSON:', error);
+						}
+						%>
+						<span class="header-cart-item-info">
+							<span class="quantity-cart"><%= item.quantity %></span> x <span class="sellingPrice-cart"> <%= item.sellingPrice %></span> = <span class="sub-total-single"> <%= item.sellingPrice * item.quantity %></span>
+						</span>
+
+					</div>
+				</li>
+				<% }); %>
+				<% } else { %>
+					<p>No items in the cart</p>
+				<% } %>
+			</ul>                
+		</div>
+		<div class="cart-summary">
+			<div class="subtotal-container flex-sb">
+				<span>Subtotal</span>
+				<span class="sub-total"></span> 
+			</div>
+			
+			<div>
+				<a href="/checkout" class="add-cart-button">
+					View Cart
+				</a>
+			</div>
+			<div>
+				<a href="/checkout" class="checkout-button">
+					Check Out
+				</a>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+	<!-- Modal1 -->
+	<div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
+		<div class="overlay-modal1 js-hide-modal1"></div>
+
+		<div class="container">
+			<div class="bg0 how-pos3-parent">
+				<button class="how-pos3 hov3 trans-04 js-hide-modal1">
+					<img src="/images/icons/icon-close.png" alt="CLOSE">
+				</button>
+
+				<div class="row">
+					<div class="col-md-6 col-lg-5 p-b-30">
+						<div class="image-slider">
+							<div class="main-image-container">
+								<img id="currentImage" class="main-image" src="" alt="Current Image">
+								<div id="prevArrow" class="arrow prev-arrow">&#10094;</div>
+								<div id="nextArrow" class="arrow next-arrow">&#10095;</div>
+							</div>
+							<div class="thumbnail-container">
+								<div id="thumbnailWrapper" class="thumbnail-wrapper">
+									<div id="thumbnailContainer" class="thumbnails"></div>
+								</div>
+							</div>
+						</div>
+						
+													
+					</div>
+						
+					<div class="col-md-6 col-lg-7 p-b-30">
+						<div class="p-r-50 p-t-5 p-lr-0-lg">
+							<h4 class="mtext-105 cl2 js-name-detail">
+								Product name will be here js-name-details
+							</h4>
+							<p class="product-type">
+								<span class="brand-name"> ASUS </span>
+								<span class="product-code"> BX-4675 </span>
+								<span id="available-stock">245</span>
+							</p>
+					
+							<span class="">
+								<span class="discountPrice sellingPrice"></span>
+								<span class="regularPrice sellingPrice"></span>
+							</span>
+					
+							<span class="if-discount">
+								<span class="mtext-106 cl2">MRP
+									<strike>৳ <span class="regularPrice">550</span></strike>
+								</span>
+								<span>
+									<span class="percentage"></span>
+								</span>
+							</span>
+							<span style="display: none;" class="percentage"></span>
+							<div id="selected-value" style="display: none;"></div>
+							<div class="discountPrice" style="display: none;"></div>
+							<input type="text" class="cart-product-id" hidden>
+							<input type="text" class="insideDhaka" hidden>
+							<input type="text" class="outsideDhaka" hidden>
+					
+							<p style="color:rgb(50, 137, 50)" class="delivery-messeage p-t-20 p-b-20">FREE DELIVERY</p>
+					
+							<p class="description">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, beatae? Explicabo enim, quas at reiciendis eius eaque nisi eveniet porro repudiandae, odio quasi magni ratione reprehenderit illum minus numquam. Aliquid.
+							</p>
+					
+							<!--  -->
+							<div class="p-t-33">
+								<div id="option-container"></div>
+								<div class="flex-w flex-r-m p-b-10">
+									<div class="size-203">
+										ITEM
+									</div>
+					
+									<div class="wrap-num-product">
+										<div class="btn-num-product-down">
+											<i class="fs-16 zmdi zmdi-minus"></i>
+										</div>
+										<input class="num-product quantity" id="quantity" type="text" name="num-product" value="1" min="1">
+										<div class="btn-num-product-up">
+											<i class="fs-16 zmdi zmdi-plus"></i>
+										</div>
+									</div>
+
+
+								</div>
+							</div>
+					
+					
+							<div class="flex-r-m p-b-10 p-t-14">
+								<button id="add-to-cart" class="flex-c-m stext-101 cl0 size-107 bg5 hov-btn1 p-lr-15 trans-04 m-r-11" style="border-radius: 5px;">
+									Add to cart
+								</button>
+					
+								<button id="buy-now" class="flex-c-m stext-101 cl0 size-107 bg5 hov-btn1 p-lr-15 trans-04" style="border-radius: 5px;">
+									BUY NOW
+								</button>
+							</div>
+					
+							<!--  -->
+							<div class="flex-w flex-m p-t-20">
+								<a href="https://wa.me/8801772512057" class="whatsapp-button" target="_blank">
+									<i class="fa fa-whatsapp"></i> Live Chat on Whatsapp 
+								</a>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	  
+
+	
+	
+
+<script>
+	$(document).ready(function() {
+    let autoSlideInterval; // Declare autoSlideInterval globally
+
+    // Function to handle showing the modal and fetching product details
+    $('.js-show-modal1').on('click', function(e) {
+        e.preventDefault();
+        var dataId = $(this).data('id');
+        
+        // AJAX request to fetch product details
+        $.ajax({
+            url: '/get-single-product', // Replace with your backend endpoint
+            type: 'GET',
+            data: { id: dataId }, // Send id as a GET parameter
+            success: function(response) {
+                console.log('Product details fetched successfully:', response.product);
+                
+                // Parse product options if available
+                let productOptions = {};
+                if (response.product.description.length) {
+                    productOptions = JSON.parse(response.product.description);
+                }
+
+                // Update UI based on fetched product data
+                if (!response.product.discountPrice) {
+                    $('.discountPrice').hide();
+                    $('.if-discount').hide();
+                } else {
+                    $('.regularPrice.sellingPrice').remove();
+                    $('.percentage').text(((response.product.regularPrice - response.product.discountPrice) / response.product.regularPrice * 100).toFixed(2));
+                    $('span.regularPrice').text(response.product.regularPrice);
+                    $('.discountPrice.sellingPrice').text(response.product.discountPrice);
+                }
+                
+                if (response.product.isFreedelivery) {
+                    $('.delivery-messeage').remove();
+                }
+
+                // Prepare array of image URLs
+                const images = response.product.images.map(image => `/images/${image.filename}`);
+                let currentIndex = 0;
+
+                // Select necessary DOM elements
+                const currentImage = document.getElementById("currentImage");
+                const thumbnailContainer = document.getElementById("thumbnailContainer");
+                const prevArrow = document.getElementById("prevArrow");
+                const nextArrow = document.getElementById("nextArrow");
+                const thumbnailWrapper = document.getElementById("thumbnailWrapper");
+
+                // Clear previous thumbnails
+                thumbnailContainer.innerHTML = '';
+
+                // Create thumbnails and append them to the container
+                images.forEach((src, index) => {
+                    const thumbnail = document.createElement("img");
+                    thumbnail.src = src;
+                    thumbnail.classList.add("thumbnail");
+                    thumbnail.dataset.index = index;
+                    thumbnailContainer.appendChild(thumbnail);
+                });
+
+                // Duplicate the thumbnails to create the illusion of infinite scrolling
+                images.forEach((src, index) => {
+                    const thumbnail = document.createElement("img");
+                    thumbnail.src = src;
+                    thumbnail.classList.add("thumbnail");
+                    thumbnail.dataset.index = index;
+                    thumbnailContainer.appendChild(thumbnail);
+                });
+
+                const thumbnails = document.querySelectorAll(".thumbnail");
+
+                // Function to show image based on index
+                function showImage(index) {
+                    currentIndex = index;
+                    currentImage.style.opacity = 0; // Start fade out
+                    setTimeout(() => {
+                        currentImage.src = images[currentIndex];
+                        currentImage.style.opacity = 1; // Fade in
+                    }, 300);
+                    thumbnails.forEach((thumbnail, idx) => {
+                        if (parseInt(thumbnail.dataset.index) === currentIndex) {
+                            thumbnail.classList.add("active");
+                        } else {
+                            thumbnail.classList.remove("active");
+                        }
+                    });
+                    updateThumbnailPosition();
+                }
+
+                // Function to show next image
+                function nextImage() {
+                    currentIndex = (currentIndex + 1) % images.length;
+                    showImage(currentIndex);
+                }
+
+                // Function to show previous image
+                function prevImage() {
+                    currentIndex = (currentIndex - 1 + images.length) % images.length;
+                    showImage(currentIndex);
+                }
+
+                // Function to update thumbnail position based on current index
+                function updateThumbnailPosition() {
+                    const thumbnailWidth = thumbnails[0].clientWidth + 10;
+                    const visibleThumbnails = Math.floor(thumbnailWrapper.clientWidth / thumbnailWidth);
+                    const maxScroll = thumbnailContainer.scrollWidth - thumbnailWrapper.clientWidth;
+                    let scrollAmount = currentIndex * thumbnailWidth - thumbnailWrapper.clientWidth / 2 + thumbnailWidth / 2;
+                    if (scrollAmount < 0) scrollAmount = 0;
+                    if (scrollAmount > maxScroll) scrollAmount = maxScroll;
+                    thumbnailContainer.style.transform = `translateX(-${scrollAmount}px)`;
+                }
+
+                // Function to start auto slide of images
+                function startAutoSlide() {
+                    clearInterval(autoSlideInterval); // Clear any existing interval
+                    autoSlideInterval = setInterval(nextImage, 5000);
+                }
+
+                // Event listener for clicking on thumbnails
+                thumbnails.forEach((thumbnail) => {
+                    thumbnail.addEventListener("click", () => {
+                        showImage(parseInt(thumbnail.dataset.index));
+                        startAutoSlide();
+                    });
+                });
+
+                // Event listeners for previous and next arrows
+                prevArrow.addEventListener("click", () => {
+                    prevImage();
+                    startAutoSlide();
+                });
+
+                nextArrow.addEventListener("click", () => {
+                    nextImage();
+                    startAutoSlide();
+                });
+
+                // Start auto slide and show initial image
+                startAutoSlide();
+                showImage(currentIndex);
+
+                // Handle infinite scrolling for thumbnails
+                thumbnailWrapper.addEventListener('scroll', function () {
+                    if (thumbnailWrapper.scrollLeft === 0) {
+                        thumbnailWrapper.scrollLeft = thumbnailWrapper.scrollWidth / 2 - thumbnailWrapper.clientWidth;
+                    } else if (thumbnailWrapper.scrollLeft + thumbnailWrapper.clientWidth >= thumbnailWrapper.scrollWidth) {
+                        thumbnailWrapper.scrollLeft = thumbnailWrapper.scrollWidth / 2 - thumbnailWrapper.clientWidth;
+                    }
+                });
+
+                // Set initial scroll position to the middle
+                thumbnailWrapper.scrollLeft = thumbnailWrapper.scrollWidth / 2 - thumbnailWrapper.clientWidth;
+
+                // Update UI elements with product details
+                $('.js-name-detail').text(response.product.name);
+                $('.description').text(response.product.shortDescription);
+                $('.brand-name').text(`Brand: ${response.product.brand}`);
+                $('.product-code').text(`Code: ${response.product.productCode}`);
+                $('#available-stock').text(response.product.stockQuantity);
+                $('input.cart-product-id').val(response.product._id);
+                $('input.insideDhaka').val(response.product.insideDhaka);
+                $('input.outsideDhaka').val(response.product.outsideDhaka);
+
+                // Handle product options if available
+                if (productOptions) {
+                    const optionContainer = document.getElementById('option-container');
+                    const regularPrices = document.querySelectorAll('.regularPrice');
+                    const discountPrices = document.querySelectorAll('.discountPrice');
+                    const percentages = document.querySelectorAll('.percentage');
+                    const availableStock = document.getElementById('available-stock');
+                    const selectedValue = document.getElementById('selected-value');
+
+                    // Object to store selected values for each category
+                    const selectedValues = {};
+
+                    // Function to calculate the saved percentage
+                    function calculateSavedPercentage(sellingPrice, discountedPrice) {
+                        return ((sellingPrice - discountedPrice) / sellingPrice) * 100;
+                    }
+
+                    // Function to update the selected value display as formatted JSON
+                    function updateSelectedValueDisplay() {
+                        selectedValue.textContent = JSON.stringify(selectedValues, null, 2);
+                    }
+
+                    // Render product options
+                    for (const category in productOptions) {
+                        optionContainer.innerHTML += `<div class="flex-w flex-r-m p-b-10" id="${category}-container"></div>`;
+                        const categoryContainer = document.getElementById(`${category}-container`);
+                        categoryContainer.innerHTML += `<div class="size-203">${category.toUpperCase()}</div>`;
+                        let isFirstOption = true;
+                        for (const option in productOptions[category]) {
+                            const { sellingPrice, discountPrice, stock } = productOptions[category][option];
+                            const checkedAttribute = isFirstOption ? 'checked' : '';
+                            const selectedClass = isFirstOption ? 'selected' : '';
+                            categoryContainer.innerHTML += `
+                                <label class="option ${selectedClass}" for="${category}-${option}">
+                                    <input type="checkbox" style="display:none;" class="hidden-checkbox" id="${category}-${option}" name="${category}" value="${option}" ${checkedAttribute}>
+                                    ${option}
+                                </label>`;
+                            // Update selected values object with initial selection
+                            if (isFirstOption) {
+                                selectedValues[category] = option;
+                                isFirstOption = false;
+                            }
+                        }
+                    }
+
+                    // Update initial display with first selected options
+                    const initialSelectedValues = Object.entries(selectedValues);
+                    initialSelectedValues.forEach(([category, selectedOption]) => {
+                        const { sellingPrice, discountPrice, stock } = productOptions[category][selectedOption];
+                        const savedPercentage = calculateSavedPercentage(sellingPrice, discountPrice);
+                        regularPrices.forEach(regularPriceElement => {
+                            regularPriceElement.textContent = `${sellingPrice}`; // Update regular price in all elements
+                        });
+                        discountPrices.forEach(discountPriceElement => {
+                            discountPriceElement.textContent = `${discountPrice}`;
+                        });
+                        percentages.forEach(percentage => {
+                            percentage.textContent = `${savedPercentage.toFixed(0)}% OFF`;
+                        });
+                        availableStock.textContent = `Instock: ${stock}`;
+                    });
+
+                    // Add event listener to update price display and selected value
+                    optionContainer.addEventListener('click', (event) => {
+                        if (event.target.type === 'checkbox') {
+                            console.log("Checkbox clicked");
+                            const checkbox = event.target;
+                            const label = checkbox.parentElement;
+                            console.log("Label:", label);
+                            const category = checkbox.name;
+                            console.log("Category:", category);
+                            const selectedOption = checkbox.value;
+                            console.log("Selected Option:", selectedOption);
+                            const { sellingPrice, discountPrice, stock } = productOptions[category][selectedOption];
+                            console.log("Selling Price:", sellingPrice);
+                            console.log("Discount Price:", discountPrice);
+                            console.log("Stock:", stock);
+                            const savedPercentage = calculateSavedPercentage(sellingPrice, discountPrice);
+                            regularPrices.forEach(regularPriceElement => {
+                                regularPriceElement.textContent = `${sellingPrice}`; // Update regular price in all elements
+                            });
+                            discountPrices.forEach(discountPriceElement => {
+                                discountPriceElement.textContent = `${discountPrice}`;
+                            });
+                            percentages.forEach(percentage => {
+                                percentage.textContent = `${savedPercentage.toFixed(0)}% OFF`;
+                            });
+                            availableStock.textContent = `Instock: ${stock}`;
+                            // Update selected values object
+                            selectedValues[category] = selectedOption;
+                            // Remove 'selected' class from all options
+                            const allOptions = document.querySelectorAll(`input[name="${category}"]`);
+                            allOptions.forEach(option => {
+                                const label = option.parentElement;
+                                label.classList.remove('selected');
+                            });
+                            // Add 'selected' class to the clicked option
+                            label.classList.toggle('selected');
+                            // Update the selected value display
+                            updateSelectedValueDisplay();
+                        }
+                    });
+
+                    // Automatically trigger update of selected values after 3 seconds
+                    setTimeout(updateSelectedValueDisplay, 1000);
+                }
+
+                // Show the modal
+                $('.js-modal1').addClass('show-modal1');
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+
+    // Function to handle hiding the modal and resetting UI
+    $('.js-hide-modal1').on('click', function() {
+        // Remove active classes and reset content
+        $('.js-modal1').removeClass('show-modal1');
+        $('#option-container').empty();
+        $('#selected-value').text('');
+        // Reset images and thumbnails
+        $('#currentImage').attr('src', ''); // Clear src attribute or set a placeholder image
+        $('#thumbnailContainer').empty(); // Clear thumbnail images
+        clearInterval(autoSlideInterval); // Clear auto slide interval
+    });
+});
+	
+function getProductData() {
+	// Get data values
+	var productName = $('.js-name-detail').text().trim();
+	var sellingPrice = parseFloat($('span.sellingPrice').text().trim()); // Ensure this is a number
+	var quantity = parseInt($('#quantity').val()); // Assuming you have an input with id "quantity"
+	var metaData = $('#selected-value').text().trim(); // Make sure this element contains the correct metadata
+	var productImage = $('img.thumbnail:first').attr('src').replace('/images/', '');
+	var productCode = $('.product-code').text().trim();
+	var productId = $('input.cart-product-id').val();
+	var deliveryInside = $('input.insideDhaka').val();
+	var deliveryOutside = $('input.outsideDhaka').val();
+
+	var dataToSend = {
+		productName: productName,
+		sellingPrice: sellingPrice,
+		quantity: quantity,
+		metaData: metaData,
+		productImage: productImage,
+		productCode: productCode,
+		productId: productId,
+		insideDhaka: deliveryInside,
+		outsideDhaka: deliveryOutside,
+	};
+
+	return dataToSend;
+}
+
+function calculateTotal() {
+    let total = 0, dataNotify = 0;
+
+    $('.sub-total-single').each(function() {
+        total += parseFloat($(this).text());
+    });
+
+    $('.quantity-cart').each(function() {
+        dataNotify += parseFloat($(this).text());
+    });
+
+    $('[data-notify]').attr("data-notify", dataNotify);
+    $('.sub-total').text(total);
+}
+
+
+// Initial total calculation
+calculateTotal();
+
+$('#add-to-cart').on('click', function() {
+	var dataToSend = getProductData();
+	console.log(dataToSend);
+
+	// Change button text to "Adding..."
+	$('#add-to-cart').text('Adding...');
+
+	// Show spinner
+	$('#spinner').show();
+
+	// Send AJAX POST request
+	$.ajax({
+		type: 'POST',
+		url: '/add-to-cart',
+		data: dataToSend,
+		success: function(response) {
+			// Hide spinner
+			$('#spinner').hide();
+			console.log(response)
+			
+			var newCartItemsHtml = response.cart.map(item => {
+    var metaData;
+    try {
+        metaData = JSON.parse(item.metaData);
+    } catch (e) {
+        console.error('Error parsing JSON for metaData:', e);
+        metaData = {}; // or handle this case gracefully
+    }
+
+    var metaDataHtml = Object.keys(metaData).map(key => `
+        <span class="metaData">${key.charAt(0).toUpperCase() + key.slice(1).toLowerCase()}: ${metaData[key]}</span>
+    `).join('');	
+
+    return `
+	<li class="header-cart-item flex-w flex-t m-b-12" data-id="${item.id}">
+			<span class="cart-trash"><i class="fa fa-trash"></i></span>
+            <div class="header-cart-item-img">
+                <img class="cart-image" src="/images/${item.productImage}" alt="IMG">
+            </div>
+            <div class="header-cart-item-txt p-t-8">
+                <a href="#" class="header-cart-item-name hov-cl1 trans-04">
+                    ${item.productName}
+                </a>
+                ${metaDataHtml}
+                <span class="header-cart-item-info">
+                    <span class="quantity-cart">${item.quantity}</span> x 
+                    <span class="sellingPrice-cart">${item.sellingPrice}</span> = 
+                    <span class="sub-total-single">${item.sellingPrice * item.quantity}</span>
+                </span>
+            </div>
+        </li>
+    `;
+}).join('');
+
+
+                $('.header-cart-wrapitem').html(newCartItemsHtml);
+
+			calculateTotal();
+
+			setTimeout(function() {
+		$('#add-to-cart').text('Added');
+        $('.js-modal1').removeClass('show-modal1');
+        $('#option-container').empty(); 
+        $('#selected-value').text(''); 
+        $('.js-panel-cart').addClass('show-header-cart');
+
+			}, 2000);
+		},
+		error: function(xhr, status, error) {
+			// Hide spinner
+			$('#spinner').hide();
+
+			setTimeout(function() {
+				$('#add-to-cart').text('Add to Cart');
+			}, 2000);
+
+			console.error('Error:', error);
+		}
+	});
+});
+
+$('#buy-now').on('click', function() {
+	var dataToSend = getProductData();
+
+	// Send AJAX POST request
+	$.ajax({
+		type: 'POST',
+		url: '/add-to-cart?buy=true',
+		data: dataToSend,
+		success: function(response) {
+			window.location.href = "/checkout";
+			console.log("buy now");
+		},
+		error: function(xhr, status, error) {
+			console.error('Error:', error);
+		}
+	});
+});
+
+
+
+    $('.cart-trash').on('click', function() {
+        var productId = $(this).closest('[data-id]').data('id');
+        $.ajax({
+            url: '/add-to-cart-remove',  
+            method: 'POST',  
+            data: { id: productId },  
+            success: function(response) {
+                $('[data-id="' + productId + '"]').fadeOut('slow', function() {
+                    $(this).remove();  
+                    calculateTotal();  
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Error removing item:', error);
+            }
+        });
+    });
+
+</script>

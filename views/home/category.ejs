@@ -1,0 +1,1239 @@
+<%- include('../partials/header.ejs') %>
+
+<body class="animsition">
+	
+	<%- include('../partials/nav.ejs') %>
+<div class="container">
+	<div class="row">
+		
+	<!-- Cart -->
+	<div class="wrap-header-cart js-panel-cart">
+		<div class="s-full js-hide-cart"></div>
+
+		<div class="header-cart flex-col-l p-l-25 p-r-25">
+			<div class="header-cart-title flex-w flex-sb-m p-b-8">
+				<span class="mtext-103 cl2">
+					Your Cart
+				</span>
+
+				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+					<i class="zmdi zmdi-close"></i>
+				</div>
+			</div>
+			
+			<div class="header-cart-content flex-w js-pscroll">
+				<ul class="header-cart-wrapitem w-full">
+				<% if (cart && cart.length > 0) { %>
+				<% cart.forEach(item => { %>
+
+					<li class="header-cart-item flex-w flex-t m-b-12" data-id="<%= item.id %>">
+						<span class="cart-trash"><i class="fa fa-trash"></i></span>
+
+						<div class="header-cart-item-img">
+							<img class="cart-image" src="/images/<%= item.productImage %>" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name  hov-cl1 trans-04">
+								<%= item.productName %>pagel dlkd kdhd ehe ld id hek 
+							</a>
+							<% 
+							try {
+								let metaData = JSON.parse(item.metaData);
+								Object.keys(metaData).forEach(key => { %>
+									<span class="metaData"><%= key.charAt(0).toUpperCase() + key.slice(1).toLowerCase() %>: <%= metaData[key] %></span>
+								<% });
+							} catch (error) {
+								// Handle JSON parsing error if necessary
+								console.error('Error parsing metaData JSON:', error);
+							}
+							%>
+							<span class="header-cart-item-info">
+								<span class="quantity-cart"><%= item.quantity %></span> x <span class="sellingPrice-cart"> <%= item.sellingPrice %></span> = <span class="sub-total-single"> <%= item.sellingPrice * item.quantity %></span>
+							</span>
+
+						</div>
+					</li>
+					<% }); %>
+					<% } else { %>
+						<p>No items in the cart</p>
+					<% } %>
+				</ul>
+				
+				<div class="w-full">
+					<div class="header-cart-total w-full p-tb-40 flex-sb">
+						<span>Subtotal</span>
+						<span class="sub-total"></span>
+					</div>
+
+					<div class="header-cart-buttons flex-w w-full flex-sb">
+						<a href="/checkout" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+							View Cart
+						</a>
+
+						<a href="/checkout" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+							Check Out
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+		<div class="slider m-t-15">
+			<div class="slides">
+				<div class="slide"><a href="/"><img src="https://beautybooth.com.bd/_next/image?url=https%3A%2F%2Fadmin.beautybooth.com.bd%2F%2Fuploads%2Fall%2FPwuA5xUGmAYeRZGOLx0Pio0IgBzBZzUX8NmpE1P2.jpg&w=1920&q=75" alt="Image 1"></a></div>
+				<div class="slide"><img src="https://beautybooth.com.bd/_next/image?url=https%3A%2F%2Fadmin.beautybooth.com.bd%2F%2Fuploads%2Fall%2FW5nOm0YOKf9JQnZ9lWp0BhGvnyU7e00e7Boptehi.jpg&w=1920&q=75" alt="Image 2"></div>
+				<div class="slide"><img src="https://beautybooth.com.bd/_next/image?url=https%3A%2F%2Fadmin.beautybooth.com.bd%2F%2Fuploads%2Fall%2F7KmPnVGzv3n9aeJdyUNLq88W8MM3HZzIEFZ5eq7r.jpg&w=1920&q=75" alt="Image 3"></div>
+			</div>
+			<div class="navigation">
+				<div class="prev"><i class="fa fa-angle-left"></i></div>
+				<div class="next"><i class="fa fa-angle-right"></i></div>
+			</div>
+			<div class="dots">
+				<span class="dot active"></span>
+				<span class="dot"></span>
+				<span class="dot"></span>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<style>
+.slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+	border-radius: 0px;
+	border-radius: 15px;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+
+}
+
+.slide {
+    min-width: 100%;
+}
+
+.slide img {
+    width: 100%;
+}
+
+.navigation {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.prev, .next {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 1px 12px;
+	font-size: 18px;
+    cursor: pointer;
+    border-radius: 50%;
+	margin: 10px;
+}
+
+.dots {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.dot.active {
+    background: rgba(255, 255, 255, 1);
+}
+	</style>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelector('.slides');
+    const dots = document.querySelectorAll('.dot');
+    const prev = document.querySelector('.prev');
+    const next = document.querySelector('.next');
+    let index = 0;
+
+    const updateDots = () => {
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+        });
+    };
+
+    const showSlide = (n) => {
+        index = (n + dots.length) % dots.length;
+        slides.style.transform = `translateX(-${index * 100}%)`;
+        updateDots();
+    };
+
+    const nextSlide = () => {
+        showSlide(index + 1);
+    };
+
+    const prevSlide = () => {
+        showSlide(index - 1);
+    };
+
+    dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => showSlide(i));
+    });
+
+    next.addEventListener('click', nextSlide);
+    prev.addEventListener('click', prevSlide);
+
+    setInterval(nextSlide, 4000); // Auto-slide every 2 seconds
+    showSlide(index);
+});
+
+
+	</script>
+
+		
+
+
+
+
+	<!-- Product -->
+	<section class="bg0 p-t-23 p-b-140">
+		<div class="container">
+<a href="/product/best-seller"><div class="category" style="display: flex; margin-bottom: 10px; flex-direction: row; justify-content: space-between; align-items: center;" >
+    <span><h3>Best Seller</h3></span>
+    <span><i class="fa fa-arrow-right" ></i></span>
+</div>
+</a>
+            <div class="row">
+                <% products.forEach(product => { 
+                    if (product.isBestSeller) { %>
+                    <div class="col-6 col-md-3 col-lg-2 px-0 p-b-35 isotope-item women">
+                        <!-- Block2 -->
+                        <div class="product-card">
+                            <div class="image-container">
+                                <a href="/product/<%= product.category %>/<%= product.slug %>">
+                                    <img src="images/<%= product.previewImage %>" alt="Product Image">
+                                </a>
+                                <div class="action-buttons">
+                                    <a href="#" class="add-to-cart js-show-modal1" data-id="<%= product.id %>">Quick View</a>
+                                    <div class="icons">
+                                        <i class="fa fa-heart"></i>
+                                        <i class="fa fa-shopping-cart"></i>
+                                        <i class="fa fa-eye"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-details">
+                                <a href="/product/<%= product.category %>/<%= product.slug %>" class="product-name">
+                                    <%= product.name %>
+                                </a>
+                                <div class="price">
+                                    <% if (product.discountPrice) { %>
+                                        <span class="discount-price">৳ <%= product.discountPrice %></span>
+                                        <span class="regular-price"><strike>৳ <%= product.regularPrice %></strike></span>
+                                        <span class="discount">( <%= Math.round(((product.regularPrice - product.discountPrice) / product.regularPrice) * 100) %> % OFF )</span>
+                                    <% } else { %>
+                                        <span class="regular-price">৳ <%= product.regularPrice %></span>
+                                    <% } %>
+                                    <a href="/product/<%= product.category %>/<%= product.slug %>">
+                                        <div class="buy-now">BUY NOW</div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } 
+                }); %>
+            </div>
+            
+
+
+			<div class="flex-sb-m p-b-52">
+				<div class="flex-l-m filter-tope-group m-tb-10">
+					<button class="cl6 hov1 bor3 trans-04 m-r-20 m-tb-5 how-active1" data-filter="*">
+						All Products
+					</button>
+
+					<button class="cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
+						Women
+					</button>
+
+					<button class="cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
+						Men
+					</button>
+
+					<button class="cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
+						Bag
+					</button>
+
+					<button class="cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes">
+						Shoes
+					</button>
+
+					<button class="cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
+						Watches
+					</button>
+				</div>
+	
+			
+			</div>
+
+
+			<div class="row">
+				
+	<% products.forEach(product => { %>
+    <div class="col-6 col-md-3 col-lg-2 px-0 p-b-35 isotope-item women">
+        <!-- Block2 -->
+		<div class="product-card">
+			<div class="image-container">
+				<a href="/product/<%= product.category %>/<%= product.slug %>">	<img src="images/<%= product.previewImage %>" alt="Product Image"></a>
+				<div class="action-buttons">
+					<a href="#" class="add-to-cart js-show-modal1" data-id="<%= product.id %>">Quick View</a>
+					<div class="icons">
+						<i class="fa fa-heart"></i>
+						<i class="fa fa-shopping-cart"></i>
+						<i class="fa fa-eye"></i>
+					</div>
+				</div>
+			</div>
+			<div class="product-details">
+				<a href="/product/<%= product.category %>/<%= product.slug %>" class="product-name">
+					<%= product.name %>dffdsafda  sdfsf sdfsf
+				</a>
+				<div class="price">
+					<% if (product.discountPrice) { %>
+						<span class="discount-price">৳ <%= product.discountPrice %></span>
+						<span class="regular-price"><strike>৳ <%= product.regularPrice %></strike></span>
+						<span class="discount">( <%= Math.round(((product.discountPrice - product.regularPrice) / product.discountPrice) * 100) %> % OFF )</span>
+					<% } else { %>
+						<span class="regular-price">৳ <%= product.regularPrice %></span>
+					<% } %>
+					<a href="/product/<%= product.category %>/<%= product.slug %>">	<div class="buy-now">BUY NOW</div></a>
+				</div>
+			</div>
+		</div>
+			</div>
+<% }); %>
+
+
+</div>
+
+	</section>
+
+
+		<!-- Modal1 -->
+		<div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
+			<div class="overlay-modal1 js-hide-modal1"></div>
+	
+			<div class="container">
+				<div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
+					<button class="how-pos3 hov3 trans-04 js-hide-modal1">
+						<img src="images/icons/icon-close.png" alt="CLOSE">
+					</button>
+	
+					<div class="row">
+						<div class="col-md-6 col-lg-7 p-b-30">
+							<div class="image-slider">
+								<div class="main-image-container">
+									<img id="currentImage" class="main-image" src="image1.jpg" alt="Current Image">
+									<div id="prevArrow" class="arrow prev-arrow">&#10094;</div>
+									<div id="nextArrow" class="arrow next-arrow">&#10095;</div>
+								</div>
+								<div class="thumbnail-container">
+									<div id="thumbPrevArrow" class="thumb-arrow thumb-prev-arrow">&#10094;</div>
+									<div id="thumbnailWrapper" class="thumbnail-wrapper">
+										<div id="thumbnailContainer" class="thumbnails"></div>
+									</div>
+									<div id="thumbNextArrow" class="thumb-arrow thumb-next-arrow">&#10095;</div>
+								</div>
+							</div>							
+						</div>
+							
+						
+						<div class="col-md-6 col-lg-5 p-b-30">
+							<div class="p-r-50 p-t-5 p-lr-0-lg">
+								<h4 class="mtext-105 cl2 js-name-detail p-b-14">
+					Product name will be here js-name-details
+								</h4>
+								<p class="p-b-14"><span class="brand-name"> ASUS </span> || <span class="product-code"> BX-4675 </span> || In-stock: <span id="available-stock">245</span> </p>
+								<span class="selectedval"></span>
+															<span class="mtext-106 cl2">
+																	<span class="discountPrice sellingPrice">500</span>
+																	<span class="regularPrice sellingPrice">550</span>
+															</span>
+								
+														<span class="if-discount">
+															<span class="mtext-106 cl2">
+																<strike>MPR ৳ <span class="regularPrice">550</span></strike>
+															</span>
+															<span class="mtext-106 cl2">
+																<span class="percentage">50%</span>
+															</span>
+														</span>
+								<span class="percentage"></span>
+					<div id="selected-value"></div>
+					<div class="discountPrice"></div>
+					<input type="text" class="cart-product-id">
+					<input type="text" class="cart-product-id">
+					<input type="text" class="insideDhaka">
+					<input type="text" class="outsideDhaka">
+
+					
+									<p style="color:rgb(50, 137, 50)" class="delivery-messeage">FREE DELIVERY</p>
+							
+								
+								<div id="available-stock">
+					
+								</div>
+								<p class="stext-102 cl3 p-t-23 description">
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, beatae? Explicabo enim, quas at reiciendis eius eaque nisi eveniet porro repudiandae, odio quasi magni ratione reprehenderit illum minus numquam. Aliquid.
+								</p>
+								
+								<!--  -->
+								<div class="p-t-33">
+									<div class="flex-w flex-r-m p-b-10">
+										
+											<div class="size-203">
+												Color
+											</div>
+											<label for="red">
+												Red
+												<input id="red" type="radio" name="color" value="option1" checked>
+												</label>
+											<label for="green">
+					
+					Green									<input id="green" type="radio" name="color" value="option2">
+												</label>
+											<label for="blue" class="color-option">
+					Blue
+												<input id="for" type="radio" name="color" value="option3">
+											</label>
+							</div>
+					
+					<div id="option-container">
+					
+					</div>
+					<div class="flex-w flex-r-m p-b-10">
+					
+					<div class="size-203">
+					Item
+					</div>
+					
+					<div class="size-204 flex-w flex-m">
+					<div class="wrap-num-product flex-w m-r-20">
+					<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+					<i class="fs-16 zmdi zmdi-minus"></i>
+					</div>
+					
+					<input class="mtext-104 cl3 txt-center num-product" id="quantity" type="number" name="num-product" value="1">
+					
+					<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+					<i class="fs-16 zmdi zmdi-plus"></i>
+					</div>
+					</div>
+					</div>
+					</div>
+					</div>							
+					
+					
+					
+					</div>							
+					
+					<style>
+					
+					label> input{
+					display: none;
+					}					
+					</style>								  
+					
+									
+					
+									<div class="flex-r-m p-b-10 p-t-14">
+					
+										<button id="add-to-cart" class="flex-c-m stext-101 cl0 size-107 bg7 hov-btn1 p-lr-15 trans-04 m-r-11" style="border-radius: 8px;">
+											Add to cart
+										</button>
+					
+										<button id="buy-now" class="flex-c-m stext-101 cl0 size-107 bg7 hov-btn1 p-lr-15 trans-04" style="border-radius: 10px;">
+											BUY NOW
+										</button>
+									</div>
+					
+					
+					
+					
+							
+								<!--  -->
+								<div class="flex-w flex-m p-t-40 respon7">
+									<div class="flex-m bor9 p-r-10 m-r-11">
+										<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
+											<i class="zmdi zmdi-favorite"></i>
+										</a>
+									</div>
+					
+									<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
+										<i class="fa fa-facebook"></i>
+									</a>
+					
+									<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
+										<i class="fa fa-twitter"></i>
+									</a>
+					
+									<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
+										<i class="fa fa-google-plus"></i>
+									</a>
+								</div>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<style>
+			.option-container {
+	  margin-bottom: 20px;
+	}
+	.option {
+	  display: flex;
+	  justify-content: space-between;
+	  align-items: center;
+	  padding: 10px;
+	  border: 1px solid #ccc;
+	  cursor: pointer;
+	  margin-bottom: 10px;
+	}
+	.option.selected {
+	  background-color: lightblue;
+	}
+	.hidden-checkbox {
+	  
+	}
+	.sellingPrice::before {
+    content: "৳";
+    margin-right: 5px; 
+}
+
+nav.bottom-nav{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0px;
+  height: 70px;
+  border-top: 1px solid rgb(10, 10, 10 / 20%);
+  border-top-left-radius : 12px;
+border-top-right-radius : 12px;
+background-color:rgb(255, 255, 255) !important;
+  z-index: 34;
+  backdrop-filter: blur(8px); 
+
+}
+.nav-item{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 14px 10px 8px 10px;
+  width: 100%;
+  color: white!important;
+
+}
+.nav-Item{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 10px 8px 10px;
+  width: 100%;
+
+}
+.nav-Item i{
+  font-size: 20px;
+color: rgb(0, 0, 0);
+margin-bottom:5px;
+}
+.nav-Item span{
+  font-size: 12px;
+color: rgb(0, 0, 0);
+}
+/* ripple effect */
+.ripple {
+background-position: center;
+transition: background 0.8s;
+}
+
+.ripple:hover{
+background-color: #e4e4e4;
+background-image: radial-gradient(circle,transparent 1%,#e4e4e4 1%);
+background-position: center;
+outline: none;
+border-radius: 50px;
+background-size: 15000%;
+}
+
+.ripple:active{
+transition: background 0s;
+background-color: #949494;    
+background-size: 100%;
+}
+
+	  </style>
+		  
+
+
+
+		  <section class="Bottom-Navigatoin">
+			<nav class="bottom-nav">
+				 <a class="nav-Item ripple" href="/">
+					<i class="fa fa-home"></i>
+					<span>Home</span>
+				 </a>
+		   
+				 <a class="nav-Item ripple js-show-cart" href="#">
+					<i class="fa fa-cart-plus"></i>
+					<span>Cart</span>
+				 </a>
+		   
+		
+				 <a class="nav-Item ripple" href="/course">
+					<i class="fa fa-whatsapp"></i>
+					<span>Whatsapp</span>
+				 </a>
+		   
+				 <a class="nav-Item ripple" href="/dashboard">
+				   <i class="fa fa-user"></i>
+				   <span>Profile</span>
+				 </a>
+				 
+				 <a class="nav-Item" href="#">
+					<input type="checkbox" id="menu-toggle" class="menu-toggle">
+					<label for="menu-toggle" class="btn-show-menu-mobile" style="background-color: none;">
+						<i class="menu-icon fa fa-bars"></i>
+						<i class="cross-icon fa fa-times"></i>
+					</label>	
+					<span>Profile</span>
+		
+				  </a>
+			   </nav>
+		   </section>
+
+
+<%- include('../partials/footer.ejs') %>
+
+
+
+<script>
+	$(document).ready(function() {
+    $('.js-show-modal1').on('click', function(e) {
+        e.preventDefault();
+        var dataId = $(this).data('id');
+        $.ajax({
+            url: '/get-single-product', // Replace with your backend endpoint
+            type: 'GET',
+            data: { id: dataId }, // Send id as a GET parameter
+            success: function(response) {
+                console.log('Product details fetched successfully:', response.product);
+                let productOptions = {};
+				
+                if (response.product.description.length) {
+                    productOptions = JSON.parse(response.product.description);
+                }
+				
+
+console.log(response.product.discountPrice)
+				if(!response.product.discountPrice){
+					$('.discountPrice').hide();
+					$('.if-discount').hide();
+					
+					} else {
+						$('.regularPrice.sellingPrice').remove();
+						$('.percentage').text(((response.product.regularPrice - response.product.discountPrice) / response.product.regularPrice * 100).toFixed(2));
+						$('span.regularPrice').text(response.product.regularPrice);
+						$('.discountPrice.sellingPrice').text(response.product.discountPrice);
+           
+					}
+				if(response.product.isFreedelivery){
+					$('.delivery-messeage').remove();
+				}
+
+                const images = response.product.images.map(image => `/images/${image.filename}`);
+                let currentIndex = 0;
+                const currentImage = document.getElementById("currentImage");
+                const thumbnailContainer = document.getElementById("thumbnailContainer");
+                const thumbPrevArrow = document.getElementById("thumbPrevArrow");
+                const thumbNextArrow = document.getElementById("thumbNextArrow");
+                const thumbnailWrapper = document.getElementById("thumbnailWrapper");
+                let autoSlideInterval;
+                // Clear previous thumbnails
+                thumbnailContainer.innerHTML = '';
+
+                // Create thumbnails and append them to the container
+                images.forEach((src, index) => {
+                    const thumbnail = document.createElement("img");
+                    thumbnail.src = src;
+                    thumbnail.classList.add("thumbnail");
+                    thumbnail.dataset.index = index;
+                    thumbnailContainer.appendChild(thumbnail);
+                });
+
+                // Duplicate the thumbnails to create the illusion of infinite scrolling
+                images.forEach((src, index) => {
+                    const thumbnail = document.createElement("img");
+                    thumbnail.src = src;
+                    thumbnail.classList.add("thumbnail");
+                    thumbnail.dataset.index = index;
+                    thumbnailContainer.appendChild(thumbnail);
+                });
+                const thumbnails = document.querySelectorAll(".thumbnail");
+                function showImage(index) {
+                    currentIndex = index;
+                    currentImage.style.opacity = 0; // Start fade out
+                    setTimeout(() => {
+                        currentImage.src = images[currentIndex];
+                        currentImage.style.opacity = 1; // Fade in
+                    }, 300);
+                    thumbnails.forEach((thumbnail, idx) => {
+                        if (parseInt(thumbnail.dataset.index) === currentIndex) {
+                            thumbnail.classList.add("active");
+                        } else {
+                            thumbnail.classList.remove("active");
+                        }
+                    });
+                    updateThumbnailPosition();
+                }
+                function nextImage() {
+                    currentIndex = (currentIndex + 1) % images.length;
+                    showImage(currentIndex);
+                }
+
+                function prevImage() {
+                    currentIndex = (currentIndex - 1 + images.length) % images.length;
+                    showImage(currentIndex);
+                }
+                function updateThumbnailPosition() {
+                    const thumbnailWidth = thumbnails[0].clientWidth + 10;
+                    const visibleThumbnails = Math.floor(thumbnailWrapper.clientWidth / thumbnailWidth);
+                    const maxScroll = thumbnailContainer.scrollWidth - thumbnailWrapper.clientWidth;
+                    let scrollAmount = currentIndex * thumbnailWidth - thumbnailWrapper.clientWidth / 2 + thumbnailWidth / 2;
+                    if (scrollAmount < 0) scrollAmount = 0;
+                    if (scrollAmount > maxScroll) scrollAmount = maxScroll;
+                    thumbnailContainer.style.transform = `translateX(-${scrollAmount}px)`;
+                }
+
+                function autoSlide() {
+                    clearInterval(autoSlideInterval);
+                    autoSlideInterval = setInterval(nextImage, 5000);
+                }
+
+                thumbnails.forEach((thumbnail) => {
+                    thumbnail.addEventListener("click", () => {
+                        showImage(parseInt(thumbnail.dataset.index));
+                        autoSlide();
+                    });
+                });
+                thumbPrevArrow.addEventListener("click", () => {
+                    prevImage();
+                    autoSlide();
+                });
+
+                thumbNextArrow.addEventListener("click", () => {
+                    nextImage();
+                    autoSlide();
+                });
+
+                autoSlide();
+                showImage(currentIndex);
+
+                // Handle infinite scrolling for thumbnails
+                thumbnailWrapper.addEventListener('scroll', function () {
+                    if (thumbnailWrapper.scrollLeft === 0) {
+                        thumbnailWrapper.scrollLeft = thumbnailWrapper.scrollWidth / 2 - thumbnailWrapper.clientWidth;
+                    } else if (thumbnailWrapper.scrollLeft + thumbnailWrapper.clientWidth >= thumbnailWrapper.scrollWidth) {
+                        thumbnailWrapper.scrollLeft = thumbnailWrapper.scrollWidth / 2 - thumbnailWrapper.clientWidth;
+                    }
+                });
+
+                // Set initial scroll position to the middle
+                thumbnailWrapper.scrollLeft = thumbnailWrapper.scrollWidth / 2 - thumbnailWrapper.clientWidth;
+
+                $('.js-name-detail').text(response.product.name);
+                $('.description').text(response.product.shortDescription);
+                $('.brand-name').text(response.product.brand);
+                $('.product-code').text(response.product.productCode);
+				$('#available-stock').text(response.product.stockQuantity);
+				$('input.cart-product-id').val(response.product._id);
+				$('input.insideDhaka').val(response.product.insideDhaka);
+				$('input.outsideDhaka').val(response.product.outsideDhaka);
+		console.log(productOptions)
+		if(productOptions){		
+				const optionContainer = document.getElementById('option-container');
+                const regularPrices = document.querySelectorAll('.regularPrice');
+                const discountPrices = document.querySelectorAll('.discountPrice');
+                const percentages = document.querySelectorAll('.percentage');
+                const availableStock = document.getElementById('available-stock');
+                const selectedValue = document.getElementById('selected-value');
+                console.log(optionContainer);
+
+                // Object to store selected values for each category
+                const selectedValues = {};
+
+                // Function to calculate the saved percentage
+                function calculateSavedPercentage(sellingPrice, discountedPrice) {
+                    return ((sellingPrice - discountedPrice) / sellingPrice) * 100;
+                }
+
+                // Function to update the selected value display as formatted JSON
+                function updateSelectedValueDisplay() {
+                    selectedValue.textContent = JSON.stringify(selectedValues, null, 2);
+                }
+
+                // Render product options
+                for (const category in productOptions) {
+                    optionContainer.innerHTML += `<div class="flex-w flex-r-m p-b-10" id="${category}-container"></div>`;
+                    const categoryContainer = document.getElementById(`${category}-container`);
+                    categoryContainer.innerHTML += `<div class="size-203">${category.toUpperCase()}</div>`;
+                    let isFirstOption = true;
+                    for (const option in productOptions[category]) {
+                        const { sellingPrice, discountPrice, stock } = productOptions[category][option];
+                        const checkedAttribute = isFirstOption ? 'checked' : '';
+                        const selectedClass = isFirstOption ? 'selected' : '';
+                        categoryContainer.innerHTML += `
+                            <label class="option ${selectedClass}" for="${category}-${option}">
+                                <input type="checkbox" class="hidden-checkbox" id="${category}-${option}" name="${category}" value="${option}" ${checkedAttribute}>
+                                ${option}
+                            </label>`;
+                        // Update selected values object with initial selection
+                        if (isFirstOption) {
+                            selectedValues[category] = option;
+                            isFirstOption = false;
+                        }
+                    }
+                }
+
+                // Update initial display with first selected options
+                const initialSelectedValues = Object.entries(selectedValues);
+                initialSelectedValues.forEach(([category, selectedOption]) => {
+                    const { sellingPrice, discountPrice, stock } = productOptions[category][selectedOption];
+                    const savedPercentage = calculateSavedPercentage(sellingPrice, discountPrice);
+                    regularPrices.forEach(regularPriceElement => {
+                        regularPriceElement.textContent = `${sellingPrice}`; // Update regular price in all elements
+                    });
+                    discountPrices.forEach(discountPriceElement => {
+                        discountPriceElement.textContent = `${discountPrice}`;
+                    });
+                    percentages.forEach(percentage => {
+                        percentage.textContent = `${savedPercentage.toFixed(2)}% OFF`;
+                    });
+                    availableStock.textContent = `${stock}`;
+                });
+
+                // Add event listener to update price display and selected value
+                optionContainer.addEventListener('click', (event) => {
+                    if (event.target.type === 'checkbox') {
+                        console.log("Checkbox clicked");
+                        const checkbox = event.target;
+                        const label = checkbox.parentElement;
+                        console.log("Label:", label);
+                        const category = checkbox.name;
+                        console.log("Category:", category);
+                        const selectedOption = checkbox.value;
+                        console.log("Selected Option:", selectedOption);
+                        const { sellingPrice, discountPrice, stock } = productOptions[category][selectedOption];
+                        console.log("Selling Price:", sellingPrice);
+                        console.log("Discount Price:", discountPrice);
+                        console.log("Stock:", stock);
+                        const savedPercentage = calculateSavedPercentage(sellingPrice, discountPrice);
+                        regularPrices.forEach(regularPriceElement => {
+                            regularPriceElement.textContent = `${sellingPrice}`; // Update regular price in all elements
+                        });
+                        discountPrices.forEach(discountPriceElement => {
+                            discountPriceElement.textContent = `${discountPrice}`;
+                        });
+                        percentages.forEach(percentage => {
+                            percentage.textContent = `${savedPercentage.toFixed(2)}% OFF`;
+                        });
+                        availableStock.textContent = `${stock}`;
+                        // Update selected values object
+                        selectedValues[category] = selectedOption;
+                        // Remove 'selected' class from all options
+                        const allOptions = document.querySelectorAll(`input[name="${category}"]`);
+                        allOptions.forEach(option => {
+                            const label = option.parentElement;
+                            label.classList.remove('selected');
+                        });
+                        // Add 'selected' class to the clicked option
+                        label.classList.toggle('selected');
+                        // Update the selected value display
+                        updateSelectedValueDisplay();
+                    }
+                });
+
+                // Automatically trigger update of selected values after 3 seconds
+                setTimeout(updateSelectedValueDisplay, 1000);
+                $('.js-modal1').addClass('show-modal1'); 
+			}else{
+
+			}
+
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+		
+    });
+
+
+
+
+
+	$('.js-hide-modal1').on('click', function() {
+        $('.js-modal1').removeClass('show-modal1');
+        $('#option-container').empty(); 
+        $('#selected-value').text(''); 
+    });
+});
+
+	
+
+</script>
+
+<style>
+	.image-slider {
+    max-width: 600px;
+    margin: auto;
+}
+
+.main-image-container {
+    position: relative;
+    width: 100%;
+}
+
+.main-image {
+    width: 100%;
+    transition: opacity 0.5s ease;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.prev-arrow {
+    left: 10px;
+}
+
+.next-arrow {
+    right: 10px;
+}
+
+.thumbnail-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.thumbnail-wrapper {
+    display: flex;
+    overflow-x: auto;
+    flex-grow: 1;
+}
+
+.thumbnails {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.thumbnail {
+    width: 60px;
+    margin-right: 10px;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+.thumbnail.active,
+.thumbnail:hover {
+    opacity: 1;
+}
+
+.thumb-arrow {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+</style>
+
+
+<script>
+	
+function getProductData() {
+	// Get data values
+	var productName = $('.js-name-detail').text().trim();
+	var sellingPrice = parseFloat($('span.sellingPrice').text().trim()); // Ensure this is a number
+	var quantity = parseInt($('#quantity').val()); // Assuming you have an input with id "quantity"
+	var metaData = $('#selected-value').text().trim(); // Make sure this element contains the correct metadata
+	var productImage = $('img.thumbnail:first').attr('src').replace('/images/', '');
+	var productCode = $('.product-code').text().trim();
+	var productId = $('input.cart-product-id').val();
+	var deliveryInside = $('input.insideDhaka').val();
+	var deliveryOutside = $('input.outsideDhaka').val();
+
+	var dataToSend = {
+		productName: productName,
+		sellingPrice: sellingPrice,
+		quantity: quantity,
+		metaData: metaData,
+		productImage: productImage,
+		productCode: productCode,
+		productId: productId,
+		insideDhaka: deliveryInside,
+		outsideDhaka: deliveryOutside,
+	};
+
+	return dataToSend;
+}
+
+function calculateTotal() {
+    let total = 0, dataNotify = 0;
+
+    $('.sub-total-single').each(function() {
+        total += parseFloat($(this).text());
+    });
+
+    $('.quantity-cart').each(function() {
+        dataNotify += parseFloat($(this).text());
+    });
+
+    $('[data-notify]').attr("data-notify", dataNotify);
+    $('.sub-total').text(total);
+}
+
+
+// Initial total calculation
+calculateTotal();
+
+$('#add-to-cart').on('click', function() {
+	var dataToSend = getProductData();
+	console.log(dataToSend);
+
+	// Change button text to "Adding..."
+	$('#add-to-cart').text('Adding...');
+
+	// Show spinner
+	$('#spinner').show();
+
+	// Send AJAX POST request
+	$.ajax({
+		type: 'POST',
+		url: '/add-to-cart',
+		data: dataToSend,
+		success: function(response) {
+			// Hide spinner
+			$('#spinner').hide();
+			console.log(response)
+			
+			var newCartItemsHtml = response.cart.map(item => {
+    var metaData;
+    try {
+        metaData = JSON.parse(item.metaData);
+    } catch (e) {
+        console.error('Error parsing JSON for metaData:', e);
+        metaData = {}; // or handle this case gracefully
+    }
+
+    var metaDataHtml = Object.keys(metaData).map(key => `
+        <span class="metaData">${key.charAt(0).toUpperCase() + key.slice(1).toLowerCase()}: ${metaData[key]}</span>
+    `).join('');	
+
+    return `
+	<li class="header-cart-item flex-w flex-t m-b-12" data-id="${item.id}">
+			<span class="cart-trash"><i class="fa fa-trash"></i></span>
+            <div class="header-cart-item-img">
+                <img class="cart-image" src="/images/${item.productImage}" alt="IMG">
+            </div>
+            <div class="header-cart-item-txt p-t-8">
+                <a href="#" class="header-cart-item-name hov-cl1 trans-04">
+                    ${item.productName}
+                </a>
+                ${metaDataHtml}
+                <span class="header-cart-item-info">
+                    <span class="quantity-cart">${item.quantity}</span> x 
+                    <span class="sellingPrice-cart">${item.sellingPrice}</span> = 
+                    <span class="sub-total-single">${item.sellingPrice * item.quantity}</span>
+                </span>
+            </div>
+        </li>
+    `;
+}).join('');
+
+
+                $('.header-cart-wrapitem').html(newCartItemsHtml);
+				console.log(newCartItemsHtml)
+
+			calculateTotal();
+
+			setTimeout(function() {
+				$('#add-to-cart').text('Added');
+        $('.js-modal1').removeClass('show-modal1');
+        $('#option-container').empty(); 
+        $('#selected-value').text(''); 
+        $('.js-panel-cart').addClass('show-header-cart');
+
+			}, 2000);
+		},
+		error: function(xhr, status, error) {
+			// Hide spinner
+			$('#spinner').hide();
+
+			setTimeout(function() {
+				$('#add-to-cart').text('Add to Cart');
+			}, 2000);
+
+			console.error('Error:', error);
+		}
+	});
+});
+
+$('#buy-now').on('click', function() {
+	var dataToSend = getProductData();
+
+	// Send AJAX POST request
+	$.ajax({
+		type: 'POST',
+		url: '/add-to-cart?buy=true',
+		data: dataToSend,
+		success: function(response) {
+			window.location.href = "/checkout";
+			console.log("buy now");
+		},
+		error: function(xhr, status, error) {
+			console.error('Error:', error);
+		}
+	});
+});
+
+
+
+    $('.cart-trash').on('click', function() {
+        var productId = $(this).closest('[data-id]').data('id');
+        $.ajax({
+            url: '/add-to-cart-remove',  
+            method: 'POST',  
+            data: { id: productId },  
+            success: function(response) {
+                $('[data-id="' + productId + '"]').fadeOut('slow', function() {
+                    $(this).remove();  
+                    calculateTotal();  
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Error removing item:', error);
+            }
+        });
+    });
+
+	$(document).ready(function() {
+            var offset = 5;
+            var loading = false;
+            var allProductsLoaded = false;
+
+            $(window).scroll(function() {
+                if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+                    if (!loading && !allProductsLoaded) {
+                        loading = true;
+                        $('#loading').show();
+                        loadProducts(offset, 2);
+                    }
+                }
+            });
+
+            function loadProducts(offset, limit) {
+                $.ajax({
+                    url: '/fetch-products',
+                    type: 'GET',
+                    data: { offset: offset, limit: limit },
+                    success: function(data) {
+						console.log(data)
+                        if (data.length === 0) {
+                            allProductsLoaded = true;
+                            $('#loading').hide();
+                            return;
+                        }
+						data.forEach(function(product) {
+                            var productHtml = `
+                                <div class="col-6 col-md-3 col-lg-2 px-0 p-b-35 isotope-item women">
+                                    <div class="product-card">
+                                        <div class="image-container">
+                                            <a href="/product/${product.category}/${product.slug}">
+                                                <img src="images/${product.previewImage}" alt="Product Image">
+                                            </a>
+                                            <div class="action-buttons">
+                                                <a href="#" class="add-to-cart js-show-modal1" data-id="${product.id}">Quick View</a>
+                                                <div class="icons">
+                                                    <i class="fa fa-heart"></i>
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                    <i class="fa fa-eye"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-details">
+                                            <a href="/product/${product.category}/${product.slug}" class="product-name">
+                                                ${product.name}
+                                            </a>
+                                            <div class="price">
+                                                ${product.discountPrice ? `
+                                                    <span class="discount-price">৳ ${product.discountPrice}</span>
+                                                    <span class="regular-price"><strike>৳ ${product.regularPrice}</strike></span>
+                                                    <span class="discount">( ${Math.round(((product.discountPrice - product.regularPrice) / product.discountPrice) * 100)} % OFF )</span>
+                                                ` : `
+                                                    <span class="regular-price">৳ ${product.regularPrice}</span>
+                                                `}
+                                                <a href="/product/${product.category}/${product.slug}">
+                                                    <div class="buy-now">BUY NOW</div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+                            $('.isotope-grid').append(productHtml);
+                        });
+                        offset += limit;
+                        loading = false;
+                        $('#loading').hide();
+                    },
+                    error: function() {
+                        console.log('Error fetching products');
+                        loading = false;
+                        $('#loading').hide();
+                    }
+                });
+            }
+        });
+	
+
+</script>
+	

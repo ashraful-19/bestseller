@@ -3,149 +3,82 @@
 <body class="animsition">
 <%- include('../partials/nav.ejs') %>
 
-
-
-	<!-- Cart -->
-	<div class="wrap-header-cart js-panel-cart">
-		<div class="s-full js-hide-cart"></div>
-
-		<div class="header-cart flex-col-l p-l-65 p-r-25">
-			<div class="header-cart-title flex-w flex-sb-m p-b-8">
-				<span class="mtext-103 cl2">
-					Your Cart
-				</span>
-
-				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
-					<i class="zmdi zmdi-close"></i>
-				</div>
-			</div>
-			
-			<div class="header-cart-content flex-w js-pscroll">
-				<ul class="header-cart-wrapitem w-full">
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="images/item-cart-01.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								White Shirt Pleat
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $19.00
-							</span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="images/item-cart-02.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Converse All Star
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $39.00
-							</span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="images/item-cart-03.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Nixon Porter Leather
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $17.00
-							</span>
-						</div>
-					</li>
-				</ul>
-				
-				<div class="w-full">
-					<div class="header-cart-total w-full p-tb-40">
-						Total: $75.00
-					</div>
-
-					<div class="header-cart-buttons flex-w w-full">
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-							View Cart
-						</a>
-
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-							Check Out
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
+<style>
 	
+
+	.btn-num-product-down, .btn-num-product-up{
+	height: 30px;
+	width: 30px;
+
+  }
+  .num-product {
+    width: 35px;
+    height: 30px;
+ }
+.wrap-num-product{
+margin: 0px 10px 0px 4px;
+}
+
+.wrap-num-product:before{
+content: "x";
+padding-right: 5px;
+}
+
+</style>
 		
 
 	<!-- Shoping Cart -->
-	<form class="bg0 p-t-75 p-b-85 fall-top">
+	<form class="p-t-75 p-b-85 fall-top">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-10 col-lg-7 col-xl-7 m-lr-auto m-b-50">
-					<div class="main-container">
-						<div class="header">
-							<div class="mtext-109 cl2">Order Summary</div>
-						</div>
+					<div class="header">
+						<div class="mtext-109 cl2">Order Summary</div>
+					</div>
+					<div class="main-container loader-section">
+						
 						<% if (cart && cart.length > 0) { %>
 							<% cart.forEach(item => { %>
 								<div class="row-main" data-product-id="<%= item.id %>">
 									<div class="close-icon">&times;</div>
-									<div class="column-1"><img width="100%" src="/images/<%= item.productImage %>" alt="Product 1"></div>
+									<div class="column-1"><img width="100%" src="/images/<%= item.productImage %>" alt="Product"></div>
 									<div class="column-2">
-										<span class="product-name"><%= item.productName %></span>
-										<span class="product-metaData"><%= item.metaData %></span>
-										<span class="product-color"><%= item.color %></span>
-										
-										<span class="product-image"><%= item.productImage %></span>
-										<span class="product-id"><%= item.productId %></span>
-										<span class="product-code"><%= item.productCode %></span>
-										<span class="delivery-inside"><%= item.insideDhaka %></span>
-										<span class="delivery-outside"><%= item.outsideDhaka %></span>
-										
+										<strong class="product-name"><%= item.productName %></strong>
 										<% 
 										try {
-											let metaData = JSON.parse(item.metaData);
-											Object.keys(metaData).forEach(key => { %>
-												<span><%= key.charAt(0).toUpperCase() + key.slice(1).toLowerCase() %>: <%= metaData[key] %></span>
-											<% });
+											let metaData = JSON.parse(item.metaData); 
+										%>
+										<div class="product-metaData" style="display: none;"><%= item.metaData %></div>
+											<div> 
+												<% Object.keys(metaData).forEach(key => { %>
+													<span class="metaData"><strong><%= key.charAt(0).toUpperCase() + key.slice(1).toLowerCase() %></strong>: <%= metaData[key] %></span>
+												<% }); %>
+											</div>
+										<% 
 										} catch (error) {
-											// Handle JSON parsing error if necessary
 											console.error('Error parsing metaData JSON:', error);
 										}
 										%>
+
+										<span class="product-image" style="display: none;"><%= item.productImage %></span>
+										<span class="product-id" style="display: none;" ><%= item.productId %></span>
+										<span class="product-code" style="display: none;"><%= item.productCode %></span>
+										<span class="delivery-inside" style="display: none;"><%= item.insideDhaka %></span>
+										<span class="delivery-outside" style="display: none;"><%= item.outsideDhaka %></span>
 										
-										<div class="size-204 flex-w flex-m">
-											<span class="regularPrice"><%= item.sellingPrice %></span>
-						
-											<div class="wrap-num-product flex-w m-r-20">
-												<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+										<div class="flex-w flex-m">
+											<span>৳</span><span class="regularPrice"><%= item.sellingPrice %></span> 
+											<div class="wrap-num-product">
+												<div class="btn-num-product-down">
 													<i class="fs-16 zmdi zmdi-minus"></i>
 												</div>
-						
-												<input class="mtext-104 cl3 txt-center num-product quantity" type="number" name="num-product" value="<%= item.quantity %>">
-						
-												<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+												<input class="num-product quantity" type="text" name="num-product" value="<%= item.quantity %>" min="1">
+												<div class="btn-num-product-up">
 													<i class="fs-16 zmdi zmdi-plus"></i>
 												</div>
 											</div>
-											<span>=</span> <span class="subTotalRegularPrice"><%= item.sellingPrice * item.quantity %></span>
+											
+											<span>= ৳</span><span class="subTotalRegularPrice"><%= item.sellingPrice * item.quantity %></span>
 										</div>
 									</div>
 								</div>
@@ -153,27 +86,26 @@
 						<% } else { %>
 							<p>No items in the cart</p>
 						<% } %>
-	
-					
-						<!-- Add more row-mains as needed -->
+
 					</div>
 				</div>
-		
+
+				
 				<div class="col-sm-10 col-lg-5 col-xl-5 m-lr-auto m-b-50">
-					<div class="header" style="padding: 5px 20px;">	
-						<h4 class="mtext-109 cl2">
+					<div class="header">	
+						<h4 class="mtext-109 cl2" style="font-weight: bold;">
 						Delivery Details
 						</h4>
 					</div>
 	
-					<div class="bor10 delivery-details" >			
+					<div class="bor10 delivery-details loader-section">			
 						<div class="bor12 p-b-30">
 							<div class="main-error" style="display: none;">
 								<div class="show-error" >অনুগ্রহ করে আপনার নাম, ফোন এবং ঠিকানা লিখুন</div>
 							</div>
 							
 							<div class="">
-								<span class="stext-110 cl2">
+								<span class="stext-110 cl2" style="font-weight: bold;">
 									Billing Address:
 								</span>
 							</div>
@@ -194,23 +126,23 @@
 										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="user-notes" placeholder="যদি কিছু বলার থাকে">
 									</div>
 									<div class="p-b-10 p-t-14">
-										<span class="stext-110 cl2">
+										<span class="stext-110 cl2" style="font-weight: bold;">
 											Delivery:
 										</span>
 									</div>
 		
 									<div class="">
-										<div class="flex" style="display: flex; flex-direction: row;align-items: center;">
-											<label for="inside-dhaka">
-											<input type="radio" name="delivery" id="inside" placeholder="আপনার ঠিকানা" value="60" checked>
-											<span>ঢাকার ভিতরে ৫০টাকা</span>
+										<div class="delivery-option">
+											<label for="inside">
+											<input type="radio" name="delivery" id="inside" value="60" checked>
+											<span>ঢাকার ভিতরে ৬০ টাকা</span>
 											</label>	
 										</div>
-										<br>
-										<div style="display: flex; flex-direction: row;align-items: center;">
-											<label for="outside-dhaka">
-											<input type="radio" name="delivery" id="outside" placeholder="আপনার ঠিকানা" value="120">
-											<span>ঢাকার ভিতরে ৫০টাকা</span>
+										
+										<div class="delivery-option">
+											<label for="outside">
+											<input type="radio" name="delivery" id="outside" value="120">
+											<span>ঢাকার ভিতরে ১২০ টাকা</span>
 											</label>
 										</div>
 									</div>
@@ -233,31 +165,31 @@
 								<span class="mtext-110" id="shipping">
 									0
 								</span>
-								<span id="free-delivery">Free Delivery</span>
+								<span id="free-delivery" style="color: green;">Free Delivery</span>
 							</div>
 						</div>
 						
 						<div class="p-t-18 p-b-13" style="width: 100%;">
 							<div class="size-208" style="width: 100%; display: flex; justify-content: space-between; ">
-								<span class="stext-110 cl2" style="text-align: right!important;">
+								<span class="stext-110 cl2" style="text-align: right!important; font-weight: bold;">
 									Total Amount
 								</span>
-								<span class="mtext-110" id="total">
+								<span class="mtext-110" id="total" style="font-weight: 800;">
 									
 								</span>
 							</div>
 							<div class="">
-								<div class="flex" style="display: flex; align-items: center;">
+								<div class="delivery-option">
 									<label for="cod">
-									<input type="radio" name="payment" id="cod"  value="Cash On Delivery" checked>
+									<input type="radio" name="payment" id="cod" value="Cash On Delivery" checked>
 									<span>Cash On Delivery</span>
 									</label>	
 								</div>
-								<br>
-								<div style="display: flex; align-items: center;">
-									<label for="bkash" >
-									<input type="radio" name="payment" id="bkash"  value="Bkash">
-									<span>BKash</span>
+								
+								<div class="delivery-option">
+									<label for="bkash">
+									<input type="radio" name="payment" id="bkash" value="Bkash">
+									<span>Bkash</span>
 									</label>
 								</div>
 							</div>
@@ -479,7 +411,36 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
 		// Function to update subtotal and total
+
+			function showLoader() {
+		const sections = document.querySelectorAll('.loader-section');
+		sections.forEach(section => {
+			const loaderOverlay = document.createElement('div');
+			loaderOverlay.className = 'loader-overlay';
+
+			const loader = document.createElement('span');
+			loader.className = 'loader';
+
+			loaderOverlay.appendChild(loader);
+			section.appendChild(loaderOverlay);
+			section.classList.add('loading');
+		});
+
+		// Simulate loading for 3 seconds
+		setTimeout(() => {
+			sections.forEach(section => {
+				section.classList.remove('loading');
+				const loaderOverlay = section.querySelector('.loader-overlay');
+				if (loaderOverlay) {
+					section.removeChild(loaderOverlay);
+				}
+			});
+		}, 1000);
+	}
+
+
 		function updateTotals() {
+			showLoader()
 			let subTotal = 0;
 
 			// Iterate through each product
@@ -501,6 +462,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	
 	// Function to update #inside and #outside values based on conditions
     function updateDeliveryValues() {
+		showLoader()
         var subTotal = parseFloat(document.getElementById('subTotal').textContent);
         console.log("Total value:", subTotal); // Log total value to check if it's correctly retrieved
 
@@ -586,7 +548,6 @@ if (event.target.classList.contains('close-icon')) {
 let productId = event.target.closest('.row-main').getAttribute('data-product-id');
 console.log(productId)
 
-// Simulate AJAX request to delete product (replace with actual AJAX request)
 $.ajax({
 url: '/add-to-cart-remove',
 method: 'POST',
@@ -611,7 +572,6 @@ updateTotals();
 
 		
 
-	// Event listener for input changes in num-product fields
 document.querySelectorAll('.num-product').forEach(input => {
 input.addEventListener('input', function(event) {
 let closestRowMain = input.closest('.row-main');
@@ -737,7 +697,6 @@ input.value = 0;
                 let productName = $(this).find('.product-name').text();
                 let metaData = $(this).find('.product-metaData').text();
                 let productImage = $(this).find('.product-image').text();
-                let color = $(this).find('.product-color').text();
                 let quantity = parseInt($(this).find('.num-product').val(), 10); // Ensure to specify radix 10 for parseInt
                 let sellingPrice = parseFloat($(this).find('.regularPrice').text());
                 let totalSellingPrice = parseFloat($(this).find('.subTotalRegularPrice').text());
@@ -746,7 +705,6 @@ input.value = 0;
                     name: productName,
                     metaData: metaData,
 					productImage: productImage,
-                    color: color,
                     quantity: quantity,
                     sellingPrice: sellingPrice,
                     totalSellingPrice: totalSellingPrice,
@@ -810,3 +768,63 @@ input.value = 0;
         });
     });
 </script>
+
+
+
+<style>
+
+	.loader-section {
+		position: relative;
+
+	}
+
+	.loader-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.01);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		visibility: hidden;
+	}
+	.loader, .loader:before, .loader:after {
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  animation-fill-mode: both;
+  animation: bblFadInOut 1.8s infinite ease-in-out;
+}
+.loader {
+  color: #000000;
+  font-size: 5px;
+  position: relative;
+  text-indent: -9999em;
+  transform: translateZ(0);
+  animation-delay: -0.16s;
+}
+.loader:before,
+.loader:after {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+.loader:before {
+  left: -3.5em;
+  animation-delay: -0.32s;
+}
+.loader:after {
+  left: 3.5em;
+}
+
+@keyframes bblFadInOut {
+  0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em }
+  40% { box-shadow: 0 2.5em 0 0 }
+}
+    
+	.loading .loader-overlay {
+		visibility: visible;
+	}
+</style>

@@ -474,7 +474,7 @@
            
                                         <% if (product.discountPrice) { %>
                                             <span id="old-price">TK <%= product.sellingPrice + product.discountPrice %></span>
-                                            <span id="discount-percentage">-<%= Math.round(((product.discountPrice ) / product.sellingPrice) * 100) %>%</span>
+                                            <span id="discount-percentage"><%= Math.round(((product.discountPrice ) / product.sellingPrice) * 100) %></span>
                                         <% } %>
          </div>
                                     <div class="product-desc">

@@ -10,7 +10,6 @@ const db = require('./config/db');
 const {Product, Order} = require('./model/admin');
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
-const PORT = process.env.PORT;
 
 // Create an Express application
 const app = express();
@@ -32,10 +31,9 @@ app.use(
 
 
 const spreadsheetId = '1XK_4b2lSt20cs9iyLvFVoJY98RbaIbDgciG7XQHagKo';
-
 // Google Sheets API setup
 const auth = new google.auth.GoogleAuth({
-  keyFile: path.join(__dirname, 'credentials.json'), // Ensure the correct path to your credentials file
+  credentials: JSON.parse(process.env.GOOGLE_CREDENTIALS), 
   scopes: 'https://www.googleapis.com/auth/spreadsheets',
 });
 
@@ -74,35 +72,64 @@ next();
 app.get('/', async (req, res) => {
   try {
     const products = await Product.find();
-    
-    res.render('home/index', { products });
+    const cart = req.session.cart;
+    res.render('home/index', { products,cart });
   } catch (error) {
     console.error('Error retrieving products:', error);
     res.status(500).send('Internal Server Error');
   }
 });
-
 
 app.get('/product/:category/:name', async (req, res) => {
   try {
   const product_id = req.params.name;
-  console.log(product_id)
-    const product = await Product.findOne({slug: product_id});
-    console.log(product)
-    const cart = req.session.cart;
-    res.render('home/single-product', { product, cart });
+  console.log(product_id);
+  const product_category = req.params.category;
+  console.log(product_category);
+  const product = await Product.findOne({slug: product_id});
+  const products = await Product.find({category: product_category});
+  
+  const cart = req.session.cart;
+    res.render('home/single-product', { products,product, cart });
   } catch (error) {
     console.error('Error retrieving products:', error);
     res.status(500).send('Internal Server Error');
   }
 });
 
+
+app.get('/product/:category', async (req, res) => {
+  try {
+  const product_cat = req.params.category;
+  console.log(product_cat)
+    const products = await Product.findOne({category: product_cat});
+    console.log(products)
+    const cart = req.session.cart;
+    res.render('home/category', { products, cart });
+  } catch (error) {
+    console.error('Error retrieving products:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
+app.get('/get-single-product', async (req, res) => {
+  try {
+  const product_id = req.body.id;
+  console.log(product_id)
+    const product = await Product.findOne({id: product_id});
+    res.json({ message: 'Product added to cart successfully', product });
+  } catch (error) {
+    console.error('Error retrieving products:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 
 app.post('/add-to-cart', async (req, res) => {
     try {
         const { id, productId, productCode, productName, productImage, metaData, quantity, sellingPrice, insideDhaka, outsideDhaka } = req.body;
-console.log(req.body)
+
         // Access the session object
         const cart = req.session.cart || [];
 
@@ -120,30 +147,31 @@ console.log(req.body)
             if (existingProductIndex !== -1) {
                 // Product id exists in the cart, check metaData
                 const existingItem = cart[existingProductIndex];
-
-                    existingItem.quantity = quantity;
-                } else {
-                    // MetaData does not match, add a new item with new id and same productId
-                    const newItem = {
-                        id: uuid.v4(), // Generate a new unique ID for the cart item
-                        productId,
-                        productCode,
-                        productName,
-                        productImage,
-                        quantity,
-                        sellingPrice,
-                        metaData,
-                        insideDhaka,
-                        outsideDhaka,
-                    };
-                    cart.push(newItem);
-                }
+                existingItem.quantity = quantity;
+            } else {
+                // MetaData does not match, add a new item with new id and same productId
+                const newItem = {
+                    id: uuid.v4(), // Generate a new unique ID for the cart item
+                    productId,
+                    productCode,
+                    productName,
+                    productImage,
+                    quantity,
+                    sellingPrice,
+                    metaData,
+                    insideDhaka,
+                    outsideDhaka,
+                };
+                cart.push(newItem);
+            }
         }
 
-        // Save the updated cart back to the session
         req.session.cart = cart;
-
-        res.json({ message: 'Product added to cart successfully', cart });
+        if (req.query.buy == 'true') {
+         res.redirect('/checkout');
+        }else{
+          res.json({ message: 'Product added to cart successfully', cart });
+        }
     } catch (error) {
         console.error('Error adding product to cart:', error);
         res.status(500).json({ error: 'An error occurred while adding the product to the cart' });
@@ -181,7 +209,7 @@ app.post('/add-to-cart-remove', async (req, res) => {
 });
 
 
-app.get('/add-to-cart', async (req, res) => {
+app.get('/checkout', async (req, res) => {
   try {
 
     const cart = req.session.cart;
@@ -196,8 +224,7 @@ app.get('/add-to-cart', async (req, res) => {
 app.post('/order-confirmation', async (req, res) => {
   try {
     const orderData = req.body; // This will contain the parsed JSON data
-
-    // Ensure orderDate is set (you can adjust the format as needed)
+console.log(orderData)
     if (!orderData.orderDate) {
       orderData.orderDate = new Date().toISOString().split('T')[0]; // Set current date if not provided
     }
@@ -315,17 +342,15 @@ app.get('/order-confirmation/:id', async (req, res) => {
   try {
     const id = req.params.id;
 
-//     // Find the order by its ID
     const order = await Order.findById(id);
-// console.log(order)
+console.log(order)
+    const cart = req.session.cart;
     if (!order) {
-      // If order is not found, handle appropriately (redirect or error message)
       console.error('Order not found');
       return res.status(404).send('Order not found');
     }
 
-//     // Render the order success page with order details
-    res.render('home/order-success', { order });
+    res.render('home/order-success', { order, cart });
   } catch (error) {
     console.error('Error retrieving order:', error);
     res.status(500).send('Internal Server Error');
@@ -375,9 +400,8 @@ app.get('/checkout', async (req, res) => {
 
 app.post("/checkout", async (req, res) => {
   const { request, name } = req.body;
-
   const auth = new google.auth.GoogleAuth({
-    keyFile: "credentials.json",
+    credentials: JSON.parse(process.env.GOOGLE_CREDENTIALS),
     scopes: "https://www.googleapis.com/auth/spreadsheets",
   });
 
@@ -590,6 +614,34 @@ app.get('/admin/search-products', async (req, res) => {
 });
 
 
+app.post('/search', async (req, res) => {
+  const searchQuery = req.body.query;
+  console.log(searchQuery)
+  try {
+    // Retrieve filtered data from the database based on the search query
+    const filteredProducts = await Product.find({ name: { $regex: searchQuery, $options: 'i' } }).sort({ createdAt: -1 });
+    res.json(filteredProducts);
+  } catch (error) {
+    console.error('Error searching products:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+app.get('/search', async (req, res) => {
+  const searchQuery = req.query.query;
+  console.log(searchQuery)
+  try {
+    // Retrieve filtered data from the database based on the search query
+    const filteredProducts = await Product.find({ name: { $regex: searchQuery, $options: 'i' } }).sort({ createdAt: -1 });
+    res.json(filteredProducts);
+  } catch (error) {
+    console.error('Error searching products:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'public/images');
@@ -668,6 +720,6 @@ console.log(req.body);
 
 
 // Start the server
-app.listen(PORT, () => {
+app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
