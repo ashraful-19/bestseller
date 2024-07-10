@@ -79,35 +79,21 @@
     [ Menu mobile ]*/
     $('.btn-show-menu-mobile').on('click', function(){
         $(this).toggleClass('is-active');
-        $('.menu-mobile').slideToggle();
-    });
+        if ($('.menu-mobile-x').hasClass('is-active')) {
+            $('.menu-mobile-x').removeClass('is-active');
+            setTimeout(function() {
+                $('.menu-mobile-x').css('display', 'none');
+            }, 300); 
+        } else {
+            $('.menu-mobile-x').css('display', 'block');
+            setTimeout(function() {
+                $('.menu-mobile-x').addClass('is-active');
+                $('.menu-mobile-x').addClass('is-active');
 
-    var arrowMainMenu = $('.arrow-main-menu-m');
-
-    for(var i=0; i<arrowMainMenu.length; i++){
-        $(arrowMainMenu[i]).on('click', function(){
-            $(this).parent().find('.sub-menu-m').slideToggle();
-            $(this).toggleClass('turn-arrow-main-menu-m');
-        })
-    }
-
-    $(window).resize(function(){
-        if($(window).width() >= 992){
-            if($('.menu-mobile').css('display') == 'block') {
-                $('.menu-mobile').css('display','none');
-                $('.btn-show-menu-mobile').toggleClass('is-active');
-            }
-
-            $('.sub-menu-m').each(function(){
-                if($(this).css('display') == 'block') { console.log('hello');
-                    $(this).css('display','none');
-                    $(arrowMainMenu).removeClass('turn-arrow-main-menu-m');
-                }
-            });
-                
+            }, 10); 
         }
     });
-
+    
 
     /*==================================================================
     [ Show / hide modal search ]*/
@@ -266,17 +252,59 @@
         });
     });
     
-    /*==================================================================
-    [ Show modal1 ]*/
-    $('.js-show-modal1').on('click',function(e){
-        e.preventDefault();
-        $('.js-modal1').addClass('show-modal1');
-    });
+    /*================================================================== */
+    $(document).ready(function() {
+        $('.searchForm').on('submit', function(event) {
+            event.preventDefault();
+        });
 
-    $('.js-hide-modal1').on('click',function(){
-        $('.js-modal1').removeClass('show-modal1');
-    });
+        $('.searchForm input[name="search-product"]').on('input', function() {
+            var searchQuery = $(this).val();
+            console.log('Search query:', searchQuery);
 
+            if (searchQuery.length > 2) { // Start search after 3 characters
+                $('#loadingAnimation').show(); // Show loading animation
+
+                $.ajax({
+                    url: '/search',
+                    type: 'POST',
+                    data: { query: searchQuery },
+                    success: function(response) {
+                        console.log(response); // Log response to console
+
+                        // Clear previous search results
+                        $('.results').empty();
+
+                        // Render new search results
+                        if (response.length > 0) {
+                            response.forEach(function(product) {
+                                var item = `
+                                <a href="/product/${product.category}/${product.slug}">
+                                    <div class="search-item-list">
+                                            <span class="product-image"><img src="/images/${product.images && product.images.length > 0 ? product.images[0].filename : 'default.jpg'}" width="45px" alt="Product Image"></span>
+                                            <span class="product-name">${product.name}</span>
+                                    </div>
+                                    </a>`;
+                                $('.results').append(item);
+                            });
+                        }else{
+                            $('.results').empty();
+
+                        } 
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error searching products:', error);
+                    },
+                    complete: function() {
+                        $('#loadingAnimation').hide(); // Hide loading animation
+                    }
+                });
+            } else if(searchQuery.length == 0) {
+                $('.results').empty();
+            }
+        });
+    });
 
 
 })(jQuery);
+
